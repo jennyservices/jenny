@@ -1,0 +1,3 @@
+*.jennydebug.db
+coverage.txt
+profile.out

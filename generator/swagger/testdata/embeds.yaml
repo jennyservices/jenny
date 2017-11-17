@@ -1,0 +1,11 @@
+swagger: "2.0"
+info:
+  description: "test"
+  version: "0.1"
+  title: "testerino"
+
+host: "api.typeform.tf"
+basePath: "/results"
+definitions:
+  Pet:
+    $ref: "./testdata/embedded.yaml"

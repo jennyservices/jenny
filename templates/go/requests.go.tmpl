@@ -1,0 +1,11 @@
+{{ define "requests" }}
+  {{ range .Resources }}
+  // _{{ camelizeDownFirst .Name}}Request is not to be used outside of this file.
+  // see https://gokit.io/examples/stringsvc.html#requests-and-responses for more detail
+    type _{{ camelizeDownFirst .Name }}Request struct {
+      {{ range .Parameters }}
+      {{- template "field" .}}
+      {{ end }}
+    }
+  {{ end }}
+{{ end }}

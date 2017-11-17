@@ -1,0 +1,15 @@
+{{- define "structs" -}}
+  {{ range . }}
+  {{ if .Description }}// {{ .Description }}{{ end }}
+    {{- template "struct" .}}
+  {{ end }}
+{{- end -}}
+
+
+{{ define "struct" }}
+type {{ .Name }} struct {
+  {{ range .Properties -}}
+    {{ template "field" .}}
+  {{ end -}}
+}
+{{ end }}

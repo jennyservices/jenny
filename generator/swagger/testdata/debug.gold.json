@@ -1,0 +1,589 @@
+{
+	"kind": "jenny.io/service",
+	"etag": "89e579e32e358e66bc6146fe2df7f7af2931776b95306498a172210bedfee41b",
+	"discoveryVersion": "v1",
+	"id": "Debug:v1.0.0",
+	"name": "Debug",
+	"canonicalName": "Debug",
+	"version": "1.0.0",
+	"revision": "TEST",
+	"title": "Debug",
+	"description": "",
+	"ownerDomain": "",
+	"ownerName": "sevki",
+	"documentationLink": "https://localhost:8080/_spec",
+	"protocol": "http",
+	"baseUrl": "",
+	"basePath": "",
+	"rootUrl": "",
+	"servicePath": "",
+	"batchPath": "",
+	"parameters": null,
+	"schemas": {
+		"Header": {
+			"id": "Debug/Header",
+			"name": "Header",
+			"cannonical_name": "Header",
+			"type": "Debug/Header",
+			"required": false,
+			"default": null,
+			"order": 0,
+			"description": "Header is generated from a swagger definition",
+			"properties": {
+				"key": {
+					"id": "Debug/Header/Key",
+					"name": "key",
+					"cannonical_name": "key",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "key is generated from a swagger definition"
+				},
+				"values": {
+					"id": "Debug/Header/Values",
+					"name": "values",
+					"cannonical_name": "values",
+					"type": "[]string",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"description": "values is generated from a swagger definition"
+				}
+			}
+		},
+		"Request": {
+			"id": "Debug/Request",
+			"name": "Request",
+			"cannonical_name": "Request",
+			"type": "Debug/Request",
+			"required": false,
+			"default": null,
+			"order": 0,
+			"description": "Request is generated from a swagger definition",
+			"properties": {
+				"body": {
+					"id": "Debug/Request/Body",
+					"name": "body",
+					"cannonical_name": "body",
+					"type": "string",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"format": "byte",
+					"description": "body is generated from a swagger definition"
+				},
+				"headers": {
+					"id": "Debug/Request/Headers",
+					"name": "headers",
+					"cannonical_name": "headers",
+					"type": "[]Debug/Header",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "headers is generated from a swagger definition"
+				},
+				"method": {
+					"id": "Debug/Request/Method",
+					"name": "method",
+					"cannonical_name": "method",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "method is generated from a swagger definition"
+				},
+				"url": {
+					"id": "Debug/Request/URL",
+					"name": "url",
+					"cannonical_name": "url",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "url is generated from a swagger definition"
+				}
+			}
+		},
+		"Response": {
+			"id": "Debug/Response",
+			"name": "Response",
+			"cannonical_name": "Response",
+			"type": "Debug/Response",
+			"required": false,
+			"default": null,
+			"order": 0,
+			"description": "Response is generated from a swagger definition",
+			"properties": {
+				"body": {
+					"id": "Debug/Response/Body",
+					"name": "body",
+					"cannonical_name": "body",
+					"type": "string",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"format": "byte",
+					"description": "body is generated from a swagger definition"
+				},
+				"headers": {
+					"id": "Debug/Response/Headers",
+					"name": "headers",
+					"cannonical_name": "headers",
+					"type": "[]Debug/Header",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "headers is generated from a swagger definition"
+				},
+				"status": {
+					"id": "Debug/Response/Status",
+					"name": "status",
+					"cannonical_name": "status",
+					"type": "integer",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "status is generated from a swagger definition"
+				}
+			}
+		},
+		"Run": {
+			"id": "Debug/Run",
+			"name": "Run",
+			"cannonical_name": "Run",
+			"type": "Debug/Run",
+			"required": false,
+			"default": null,
+			"order": 0,
+			"description": "Run is generated from a swagger definition",
+			"properties": {
+				"addr": {
+					"id": "Debug/Run/Addr",
+					"name": "addr",
+					"cannonical_name": "addr",
+					"type": "string",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"description": "addr is generated from a swagger definition"
+				},
+				"builder": {
+					"id": "Debug/Run/Builder",
+					"name": "builder",
+					"cannonical_name": "builder",
+					"type": "string",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"format": "byte",
+					"description": "builder is generated from a swagger definition"
+				},
+				"pid": {
+					"id": "Debug/Run/Pid",
+					"name": "pid",
+					"cannonical_name": "pid",
+					"type": "number",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"description": "pid is generated from a swagger definition"
+				},
+				"runner": {
+					"id": "Debug/Run/Runner",
+					"name": "runner",
+					"cannonical_name": "runner",
+					"type": "string",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"format": "byte",
+					"description": "runner is generated from a swagger definition"
+				}
+			}
+		},
+		"Service": {
+			"id": "Debug/Service",
+			"name": "Service",
+			"cannonical_name": "Service",
+			"type": "Debug/Service",
+			"required": false,
+			"default": null,
+			"order": 0,
+			"description": "Service is generated from a swagger definition",
+			"properties": {
+				"docker": {
+					"id": "Debug/Service/Docker",
+					"name": "docker",
+					"cannonical_name": "docker",
+					"type": "boolean",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "docker is generated from a swagger definition"
+				},
+				"healthy": {
+					"id": "Debug/Service/Healthy",
+					"name": "healthy",
+					"cannonical_name": "healthy",
+					"type": "boolean",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "healthy is generated from a swagger definition"
+				},
+				"name": {
+					"id": "Debug/Service/Name",
+					"name": "name",
+					"cannonical_name": "name",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "name is generated from a swagger definition"
+				},
+				"ready": {
+					"id": "Debug/Service/Ready",
+					"name": "ready",
+					"cannonical_name": "ready",
+					"type": "boolean",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "ready is generated from a swagger definition"
+				},
+				"swagger": {
+					"id": "Debug/Service/Swagger",
+					"name": "swagger",
+					"cannonical_name": "swagger",
+					"type": "boolean",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "swagger is generated from a swagger definition"
+				},
+				"swagger_definition": {
+					"id": "Debug/Service/SwaggerDefinition",
+					"name": "swagger_definition",
+					"cannonical_name": "swagger_definition",
+					"type": "string",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"description": "swagger_definition is generated from a swagger definition"
+				}
+			}
+		},
+		"Trip": {
+			"id": "Debug/Trip",
+			"name": "Trip",
+			"cannonical_name": "Trip",
+			"type": "Debug/Trip",
+			"required": false,
+			"default": null,
+			"order": 0,
+			"description": "Trip is generated from a swagger definition",
+			"properties": {
+				"duration": {
+					"id": "Debug/Trip/Duration",
+					"name": "duration",
+					"cannonical_name": "duration",
+					"type": "integer",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"format": "int64",
+					"description": "duration is generated from a swagger definition"
+				},
+				"id": {
+					"id": "Debug/Trip/ID",
+					"name": "id",
+					"cannonical_name": "id",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "id is generated from a swagger definition"
+				},
+				"method": {
+					"id": "Debug/Trip/Method",
+					"name": "method",
+					"cannonical_name": "method",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "method is generated from a swagger definition"
+				},
+				"operationId": {
+					"id": "Debug/Trip/OperationID",
+					"name": "operationId",
+					"cannonical_name": "operationId",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "operationId is generated from a swagger definition"
+				},
+				"request": {
+					"id": "Debug/Trip/Request",
+					"name": "request",
+					"cannonical_name": "request",
+					"type": "Debug/Request",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"description": "request is generated from a swagger definition"
+				},
+				"response": {
+					"id": "Debug/Trip/Response",
+					"name": "response",
+					"cannonical_name": "response",
+					"type": "Debug/Response",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"description": "response is generated from a swagger definition"
+				},
+				"status": {
+					"id": "Debug/Trip/Status",
+					"name": "status",
+					"cannonical_name": "status",
+					"type": "integer",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "status is generated from a swagger definition"
+				},
+				"test": {
+					"id": "Debug/Trip/Test",
+					"name": "test",
+					"cannonical_name": "test",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"format": "byte",
+					"description": "test is generated from a swagger definition"
+				},
+				"url": {
+					"id": "Debug/Trip/URL",
+					"name": "url",
+					"cannonical_name": "url",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "url is generated from a swagger definition"
+				}
+			}
+		}
+	},
+	"resources": {
+		"Debug/GetService": {
+			"id": "Debug/GetService",
+			"Name": "GetService",
+			"path": "/services/{name}",
+			"httpMethod": "GET",
+			"description": "returns a services details",
+			"produces": [
+				"application/octet-stream"
+			],
+			"consumes": [
+				"application/json"
+			],
+			"parameters": {
+				"Name": {
+					"id": "Debug/GetService/Name",
+					"name": "Name",
+					"cannonical_name": "name",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "name of the service to return",
+					"location": "path"
+				}
+			},
+			"parameterOrder": [
+				"Name"
+			],
+			"responses": {
+				"OK": {
+					"http_status": 200,
+					"returns": {
+						"body": {
+							"id": "Debug/GetService/Body",
+							"name": "body",
+							"cannonical_name": "body",
+							"type": "string",
+							"required": false,
+							"default": null,
+							"order": 0,
+							"format": "byte",
+							"description": "body is generated from a swagger definition",
+							"location": "body"
+						}
+					},
+					"default": true,
+					"error": false
+				}
+			}
+		},
+		"Debug/GetTrip": {
+			"id": "Debug/GetTrip",
+			"Name": "GetTrip",
+			"path": "/trips/{id}",
+			"httpMethod": "GET",
+			"description": "get a specific request and response",
+			"produces": [
+				"application/json",
+				"application/x-www-form-urlencoded"
+			],
+			"consumes": [
+				"application/x-www-form-urlencoded"
+			],
+			"parameters": {
+				"ID": {
+					"id": "Debug/GetTrip/ID",
+					"name": "ID",
+					"cannonical_name": "id",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "name of the service to return",
+					"location": "path"
+				}
+			},
+			"parameterOrder": [
+				"ID"
+			],
+			"responses": {
+				"OK": {
+					"http_status": 200,
+					"returns": {
+						"body": {
+							"id": "Debug/GetTrip/Body",
+							"name": "body",
+							"cannonical_name": "body",
+							"type": "Debug/Trip",
+							"required": false,
+							"default": null,
+							"order": 0,
+							"description": "body is generated from a swagger definition",
+							"location": "body"
+						}
+					},
+					"default": true,
+					"error": false
+				}
+			}
+		},
+		"Debug/Run": {
+			"id": "Debug/Run",
+			"Name": "Run",
+			"path": "/run",
+			"httpMethod": "GET",
+			"description": "The logs of the last run",
+			"produces": [
+				"application/json",
+				"application/x-www-form-urlencoded"
+			],
+			"consumes": [
+				"application/x-www-form-urlencoded"
+			],
+			"parameters": {},
+			"parameterOrder": [],
+			"responses": {
+				"OK": {
+					"http_status": 200,
+					"returns": {
+						"body": {
+							"id": "Debug/Run/Body",
+							"name": "body",
+							"cannonical_name": "body",
+							"type": "Debug/Run",
+							"required": false,
+							"default": null,
+							"order": 0,
+							"description": "body is generated from a swagger definition",
+							"location": "body"
+						}
+					},
+					"default": true,
+					"error": false
+				}
+			}
+		},
+		"Debug/Services": {
+			"id": "Debug/Services",
+			"Name": "Services",
+			"path": "/services",
+			"httpMethod": "GET",
+			"description": "Returns a list of registered services",
+			"produces": [
+				"application/json",
+				"application/xml"
+			],
+			"parameters": {},
+			"parameterOrder": [],
+			"responses": {
+				"OK": {
+					"http_status": 200,
+					"returns": {
+						"body": {
+							"id": "Debug/Services/Body",
+							"name": "body",
+							"cannonical_name": "body",
+							"type": "[]Debug/Service",
+							"required": false,
+							"default": null,
+							"order": 0,
+							"description": "body is generated from a swagger definition",
+							"location": "body"
+						}
+					},
+					"default": true,
+					"error": false
+				}
+			}
+		},
+		"Debug/Trips": {
+			"id": "Debug/Trips",
+			"Name": "Trips",
+			"path": "/trips",
+			"httpMethod": "GET",
+			"description": "List debugged trips",
+			"produces": [
+				"application/json",
+				"application/x-www-form-urlencoded"
+			],
+			"consumes": [
+				"application/x-www-form-urlencoded"
+			],
+			"parameters": {},
+			"parameterOrder": [],
+			"responses": {
+				"OK": {
+					"http_status": 200,
+					"returns": {
+						"body": {
+							"id": "Debug/Trips/Body",
+							"name": "body",
+							"cannonical_name": "body",
+							"type": "[]Debug/Trip",
+							"required": false,
+							"default": null,
+							"order": 0,
+							"description": "body is generated from a swagger definition",
+							"location": "body"
+						}
+					},
+					"default": true,
+					"error": false
+				}
+			}
+		}
+	}
+}

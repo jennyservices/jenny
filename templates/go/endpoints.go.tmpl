@@ -1,0 +1,33 @@
+{{ define "endpoints" }}
+  {{ $svcName := .Name }}
+  {{ range .Resources }}
+  // endpoints as used in https://gokit.io/examples/stringsvc.html#endpoints
+  func make{{ .Name }}Endpoint(svc {{ $svcName }},opts *options.Options) endpoint.Endpoint {
+    {{- template "endpoint" . -}}
+  }
+  {{- end -}}
+{{ end }}
+
+{{ define "endpoint" }}
+{{camelizeDownFirst .Name }}Endpoint:= func(ctx context.Context, request interface{}) (interface{}, error) {
+  {{ $resp := firstOrDefault .Responses -}}
+  {{ $paramCount := len .Parameters}}
+  {{ if gt $paramCount 0}}
+  req := request.(_{{ camelizeDownFirst .Name }}Request)
+  {{ end }}
+  resp := _{{camelizeDownFirst .Name}}Response{}
+  var err error
+
+  {{ range $resp.Returns }} resp.{{normalize .Name }},{{ end }} err = svc.{{ .Name }}(ctx {{ range .Parameters}}, req.{{.Name}} {{ end }})
+
+  return resp, err
+}
+
+{{ $scopeCount := len .Scopes}}
+{{ if gt $scopeCount 0 }}
+  opts.RegisterMiddleware("{{.Name}}",auth.RequireScopes([]string{ {{template "stringArray" .Scopes }} }))
+{{ end }}
+{{camelizeDownFirst .Name }}Middleware := opts.OpMiddlewares("{{ .Name }}")
+
+return {{camelizeDownFirst .Name }}Middleware({{camelizeDownFirst .Name }}Endpoint)
+{{ end }}

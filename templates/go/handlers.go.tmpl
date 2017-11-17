@@ -1,0 +1,34 @@
+{{ define "handlers" }}
+
+{{ $svc := .Name }}
+
+// New{{ .Name }}HTTPServer returns a HTTPHandler that can be used with the go std http package
+func New{{ .Name }}HTTPServer(svc {{ $svc }}, opts ...options.Option) http.Handler {
+  r := mux.NewRouter()
+  svcOptions := options.New()
+  for _, optf := range opts {
+    optf(svcOptions)
+  }
+  {{ range .Resources }}
+  {
+  svcOptions.RegisterMiddleware("{{ .Name }}",
+    encoders.AcceptsMustMatch([]mime.Type{ {{template "stringArray" .Produces }} }),
+  )
+ 
+	{{ camelizeDownFirst .Name }}Endpoint := make{{ .Name}}Endpoint(svc, svcOptions)
+  {{ camelizeDownFirst .Name }}Handler := httptransport.NewServer(
+  {{ camelizeDownFirst .Name }}Endpoint,
+  decode{{ .Name }}Request,
+  encode{{ .Name }}Response,
+  			svcOptions.HTTPOptions()...,
+  )
+  r.Handle("{{ .Path }}",  {{ camelizeDownFirst .Name }}Handler).Methods("{{ .HTTPMethod }}")
+  }
+  {{ end }}
+  return r
+}
+
+{{ end }}
+{{ define "stringArray" }}
+{{ range . }} "{{.}}", {{end }}
+{{ end }}

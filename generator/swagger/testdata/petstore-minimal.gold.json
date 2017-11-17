@@ -1,0 +1,64 @@
+{
+	"kind": "jenny.io/service",
+	"etag": "50d58deac680d89051fb2c63041b5052a841de3074b9f1c741cc4480dcb0ce94",
+	"discoveryVersion": "v1",
+	"id": "SwaggerPetstore:v1.0.0",
+	"name": "SwaggerPetstore",
+	"canonicalName": "Swagger Petstore",
+	"version": "1.0.0",
+	"revision": "TEST",
+	"title": "Swagger Petstore",
+	"description": "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification",
+	"ownerDomain": "",
+	"ownerName": "Swagger API Team",
+	"documentationLink": "https://localhost:8080/_spec",
+	"protocol": "http",
+	"baseUrl": "",
+	"basePath": "",
+	"rootUrl": "",
+	"servicePath": "",
+	"batchPath": "",
+	"parameters": null,
+	"schemas": {
+		"Pet": {
+			"id": "SwaggerPetstore/Pet",
+			"name": "Pet",
+			"cannonical_name": "Pet",
+			"type": "SwaggerPetstore/Pet",
+			"required": false,
+			"default": null,
+			"order": 0,
+			"properties": {
+				"id": {
+					"id": "SwaggerPetstore/Pet/ID",
+					"name": "id",
+					"cannonical_name": "id",
+					"type": "integer",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"format": "int64"
+				},
+				"name": {
+					"id": "SwaggerPetstore/Pet/Name",
+					"name": "name",
+					"cannonical_name": "name",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0
+				},
+				"tag": {
+					"id": "SwaggerPetstore/Pet/Tag",
+					"name": "tag",
+					"cannonical_name": "tag",
+					"type": "string",
+					"required": false,
+					"default": null,
+					"order": 0
+				}
+			}
+		}
+	},
+	"resources": {}
+}

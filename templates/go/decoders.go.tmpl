@@ -1,0 +1,105 @@
+{{ define "decoders"  }}
+// HTTP decoders
+{{- range .Resources }}
+func decode{{ .Name }}Request(ctx context.Context, r *http.Request) (interface{}, error)  {
+
+  var err error
+
+
+  request := _{{ camelizeDownFirst .Name }}Request{
+    {{- range .Parameters -}}
+      {{- template "defaultValue" . }}
+    {{- end -}}
+  }
+
+  {{ range .Parameters }}
+    // Extract {{ .Name }} from {{ .Location }} which is a {{ getType . }}
+    {
+      {{- template "extract" . -}}
+    }
+  {{ end }}
+  {{ $consumes := .Consumes }}
+  {{ range .Parameters }}
+    {{- if isFromLocation .Location "body" -}}
+    consumes := []mime.Type{ {{ range $consumes}}"{{.}}",{{end}} }
+
+    dec, err := decoders.RequestDecoder(r, consumes)
+    if err != nil {
+      return nil, err
+    }
+    err = dec.Decode(&request.{{ .Name }});
+    {{- end -}}
+  {{ end }}
+  return request, err
+}
+{{ end }}
+{{ end }}
+
+
+{{ define "defaultValue" -}}
+{{ $typ := getType .}}
+  {{ if .Default }}
+    {{ if .Required -}}
+      {{- if eq $typ "string"}}{{ .Name }}:  "{{.Default}}",{{ end -}}
+      {{- if eq $typ "int"}}{{ .Name }}:  {{.Default}},{{ end -}} // {{ .Default }} is the default value for {{ .Name }}
+    {{- end}}
+  {{ end }}
+{{- end }}
+
+
+{{ define "extract" }}
+
+  {{- if isFromLocation .Location "query" }}
+    val := ""
+    _, ok := r.URL.Query()["{{ .CannonicalName }}"]
+    if ok {
+      val = r.URL.Query().Get("{{ .CannonicalName }}")
+    }
+    if {{ .Required }} && !ok { // if required and doesn't exist throw an error
+      return nil, fmt.Errorf("query parameter %q doesn't exist and is required", "{{.CannonicalName}}")
+    }
+  {{ end -}}
+  {{- if isFromLocation .Location "path" -}}
+    val :=  mux.Vars(r)["{{ .CannonicalName }}"]
+  {{ end -}}
+  {{ $typ := getType .}}
+  {{- if eq $typ "int" -}}
+  request.{{ .Name }},err = strconv.Atoi(val)
+  {{ end -}}
+  {{- if eq $typ "*int" -}}
+  var i int
+  i,err = strconv.Atoi(val)
+  if err == nil {
+    request.{{ .Name }} = &i
+  }
+  if val == "" {
+    err = nil
+  }
+  {{ end -}}
+  {{- if eq $typ "bool" -}}
+  request.{{ .Name }},err = strconv.ParseBool(val)
+  {{ end -}}
+  {{- if eq $typ "*bool" -}}
+  var b bool
+  b,err = strconv.ParseBool(val)
+  if err == nil {
+    request.{{ .Name }} = &b
+  }
+  if val == "" {
+    err = nil
+  }
+  {{ end -}}
+  {{- if eq $typ "time.Time" -}}
+  request.{{ .Name }},err =  time.Parse(time.RFC3339, val)
+  {{ end -}}
+  {{- if eq $typ "string" -}}
+  request.{{ .Name }} =  val
+  {{ end -}}
+  {{- if eq $typ "*string" -}}
+  request.{{ .Name }} = &val
+  {{ end }}
+
+  if err != nil {
+    return nil, err
+  }
+{{- end }}

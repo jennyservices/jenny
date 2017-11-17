@@ -1,0 +1,13 @@
+{{ define "http" }}
+// HTTP transport after this
+
+{{ template "encoders" . }}
+{{ template "decoders" . }}
+
+{{ template "handlers" . }}
+{{ end }}
+
+{{ define "servicehttp"}}
+{{ template "serviceheader" .}}
+{{ template "http" .}}
+{{ end }}

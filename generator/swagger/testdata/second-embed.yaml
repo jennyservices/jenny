@@ -1,0 +1,10 @@
+type: "object"
+name: "Bar"
+description: "bar is a bar"
+properties:
+  barbar:
+    description: "bla test "
+    type: "string"
+example:
+  barbar: "Blue"
+  

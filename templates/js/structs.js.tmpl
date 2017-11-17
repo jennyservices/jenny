@@ -1,0 +1,12 @@
+{{ define "structs" }}
+
+{{ range .Schemas }}
+type {{ .Name}} {
+  {{ range .Properties }}{{ template "field" .}}{{ end -}}
+}
+{{ end }}
+{{ end }}
+
+
+{{- define "field" }}  {{ .Name }}{{if .Required}}?{{end}}: {{ .Type }}
+{{ end }}

@@ -1,0 +1,260 @@
+{
+	"kind": "jenny.io/service",
+	"etag": "48372a6de2270f73cf1333fe55aeac520d9dc4bd47b3d19a5d936df8b9b37b8f",
+	"discoveryVersion": "v1",
+	"id": "SwaggerPetstore:v1.0.0",
+	"name": "SwaggerPetstore",
+	"canonicalName": "Swagger Petstore",
+	"version": "1.0.0",
+	"revision": "TEST",
+	"title": "Swagger Petstore",
+	"description": "",
+	"ownerDomain": "",
+	"ownerName": "",
+	"documentationLink": "https://localhost:8080/_spec",
+	"protocol": "http",
+	"baseUrl": "petstore.swagger.io",
+	"basePath": "/v1",
+	"rootUrl": "",
+	"servicePath": "",
+	"batchPath": "",
+	"parameters": null,
+	"schemas": {
+		"Error": {
+			"id": "SwaggerPetstore/Error",
+			"name": "Error",
+			"cannonical_name": "Error",
+			"type": "SwaggerPetstore/Error",
+			"required": false,
+			"default": null,
+			"order": 0,
+			"description": "Error is generated from a swagger definition",
+			"properties": {
+				"code": {
+					"id": "SwaggerPetstore/Error/Code",
+					"name": "code",
+					"cannonical_name": "code",
+					"type": "integer",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"format": "int32",
+					"description": "code is generated from a swagger definition"
+				},
+				"message": {
+					"id": "SwaggerPetstore/Error/Message",
+					"name": "message",
+					"cannonical_name": "message",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "message is generated from a swagger definition"
+				}
+			}
+		},
+		"Pet": {
+			"id": "SwaggerPetstore/Pet",
+			"name": "Pet",
+			"cannonical_name": "Pet",
+			"type": "SwaggerPetstore/Pet",
+			"required": false,
+			"default": null,
+			"order": 0,
+			"description": "Pet is generated from a swagger definition",
+			"properties": {
+				"id": {
+					"id": "SwaggerPetstore/Pet/ID",
+					"name": "id",
+					"cannonical_name": "id",
+					"type": "integer",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"format": "int64",
+					"description": "id is generated from a swagger definition"
+				},
+				"name": {
+					"id": "SwaggerPetstore/Pet/Name",
+					"name": "name",
+					"cannonical_name": "name",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "name is generated from a swagger definition"
+				},
+				"tag": {
+					"id": "SwaggerPetstore/Pet/Tag",
+					"name": "tag",
+					"cannonical_name": "tag",
+					"type": "string",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"description": "tag is generated from a swagger definition"
+				}
+			}
+		},
+		"Pets": {
+			"id": "SwaggerPetstore/Pets",
+			"name": "Pets",
+			"cannonical_name": "Pets",
+			"type": "[]SwaggerPetstore/Pet",
+			"required": false,
+			"default": null,
+			"order": 0,
+			"description": "Pets is generated from a swagger definition"
+		}
+	},
+	"resources": {
+		"SwaggerPetstore/CreatePets": {
+			"id": "SwaggerPetstore/CreatePets",
+			"Name": "CreatePets",
+			"path": "/v1/pets",
+			"httpMethod": "POST",
+			"description": "Create a pet",
+			"produces": [
+				"application/json"
+			],
+			"consumes": [
+				"application/json"
+			],
+			"parameters": {},
+			"parameterOrder": [],
+			"responses": {
+				"Created": {
+					"http_status": 201,
+					"default": false,
+					"error": false
+				},
+				"Default": {
+					"http_status": 500,
+					"default": true,
+					"error": true
+				}
+			},
+			"scopes": [
+				"pets"
+			]
+		},
+		"SwaggerPetstore/ListPets": {
+			"id": "SwaggerPetstore/ListPets",
+			"Name": "ListPets",
+			"path": "/v1/pets",
+			"httpMethod": "GET",
+			"description": "List all pets",
+			"produces": [
+				"application/json"
+			],
+			"consumes": [
+				"application/json"
+			],
+			"parameters": {
+				"Limit": {
+					"id": "SwaggerPetstore/ListPets/Limit",
+					"name": "Limit",
+					"cannonical_name": "limit",
+					"type": "integer",
+					"required": false,
+					"default": null,
+					"order": 0,
+					"description": "How many items to return at one time (max 100)",
+					"location": "query"
+				}
+			},
+			"parameterOrder": [
+				"Limit"
+			],
+			"responses": {
+				"Default": {
+					"http_status": 500,
+					"default": true,
+					"error": true
+				},
+				"OK": {
+					"http_status": 200,
+					"returns": {
+						"body": {
+							"id": "SwaggerPetstore/ListPets/Body",
+							"name": "body",
+							"cannonical_name": "body",
+							"type": "SwaggerPetstore/Pets",
+							"required": false,
+							"default": null,
+							"order": 0,
+							"description": "body is generated from a swagger definition",
+							"location": "body"
+						},
+						"x-next": {
+							"id": "SwaggerPetstore/ListPets/Headers/x-next",
+							"name": "x-next",
+							"cannonical_name": "",
+							"type": "string",
+							"required": true,
+							"default": null,
+							"order": 0,
+							"location": "header"
+						}
+					},
+					"default": false,
+					"error": false
+				}
+			}
+		},
+		"SwaggerPetstore/ShowPetByID": {
+			"id": "SwaggerPetstore/ShowPetByID",
+			"Name": "ShowPetByID",
+			"path": "/v1/pets/{petId}",
+			"httpMethod": "GET",
+			"description": "Info for a specific pet",
+			"produces": [
+				"application/json"
+			],
+			"consumes": [
+				"application/json"
+			],
+			"parameters": {
+				"PetID": {
+					"id": "SwaggerPetstore/ShowPetByID/PetID",
+					"name": "PetID",
+					"cannonical_name": "petId",
+					"type": "string",
+					"required": true,
+					"default": null,
+					"order": 0,
+					"description": "The id of the pet to retrieve",
+					"location": "path"
+				}
+			},
+			"parameterOrder": [
+				"PetID"
+			],
+			"responses": {
+				"Default": {
+					"http_status": 500,
+					"default": true,
+					"error": true
+				},
+				"OK": {
+					"http_status": 200,
+					"returns": {
+						"body": {
+							"id": "SwaggerPetstore/ShowPetByID/Body",
+							"name": "body",
+							"cannonical_name": "body",
+							"type": "SwaggerPetstore/Pets",
+							"required": false,
+							"default": null,
+							"order": 0,
+							"description": "body is generated from a swagger definition",
+							"location": "body"
+						}
+					},
+					"default": false,
+					"error": false
+				}
+			}
+		}
+	}
+}

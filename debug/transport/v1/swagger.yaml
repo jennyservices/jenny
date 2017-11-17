@@ -1,0 +1,207 @@
+---
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Debug
+  contact:
+    name: sevki
+    email: s@sevki.org
+paths:
+  /services:
+    get:
+      tags:
+        - debug
+      summary: Returns a list of registered services
+      operationId: services
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        200:
+          schema:
+              type: array
+              items:
+                $ref: '#/definitions/Service'
+  /services/{name}:
+    get:
+      tags:
+        - debug
+      summary: returns a services details
+      operationId: getService
+      consumes:
+        - application/json
+      produces:
+        - application/octet-stream
+      parameters:
+        - name: name
+          in: path
+          description: name of the service to return
+          required: true
+          type: string
+      responses:
+        200:
+          schema:
+            type: string
+            format: byte
+  /trips:
+    get:
+      tags:
+      - debug
+      summary: List debugged trips
+      description: |
+        Trips lists the debug information for a jenny service
+      operationId: trips
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - application/x-www-form-urlencoded
+      responses:
+        200:
+          schema:
+              type: array
+              items:
+                $ref: '#/definitions/Trip'
+  /trips/{id}:
+    get:
+      tags:
+      - debug
+      summary: get a specific request and response
+      operationId: getTrip
+      parameters:
+        - name: id
+          in: path
+          description: name of the service to return
+          required: true
+          type: string
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - application/x-www-form-urlencoded
+      responses:
+        200:
+          schema:
+              $ref: '#/definitions/Trip'
+  /run:
+    get:
+      tags:
+        - debug
+      summary: The logs of the last run
+      description: |
+        The logs of the last run
+      operationId: run
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - application/x-www-form-urlencoded
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/Run'
+definitions:
+  Service:
+    properties:
+      name:
+        type: string
+      swagger_definition:
+        type: string
+      swagger:
+        type: boolean
+      docker:
+        type: boolean
+      healthy:
+        type: boolean
+      ready:
+        type: boolean
+    required:
+      - name
+      - healthy
+      - ready
+      - docker
+      - swagger
+  Request:
+    properties:
+      url:
+        type: string
+      method:
+        type: string
+      body:
+        type: string
+        format: byte
+      headers:
+        type: array
+        items:
+          $ref: '#/definitions/Header'
+    required:
+      - url
+      - method
+      - headers
+  Response:
+    properties:
+      status:
+        type: integer
+      body:
+        type: string
+        format: byte
+      headers:
+        type: array
+        items:
+          $ref: '#/definitions/Header'
+    required:
+      - status
+      - headers
+  Header:
+    properties:
+      key:
+        type: string
+      values:
+        type: array
+        items:
+          type: string
+    required:
+      - key
+
+  Trip:
+    properties:
+      id:
+        type: string
+      duration:
+        type: integer
+        format: int64
+      test:
+        type: string
+        format: byte
+      method:
+        type: string
+      status:
+        type: integer
+      operationId:
+        type: string
+      url:
+        type: string
+      request:
+        "$ref": "#/definitions/Request"
+      response:
+        "$ref": "#/definitions/Response"
+    required:
+      - id
+      - duration
+      - test
+      - method
+      - status
+      - operationId
+      - url
+  Run:
+    properties:
+      runner:
+        type: string
+        format: byte
+      builder:
+        type: string
+        format: byte
+      addr:
+        type: string
+      pid:
+        type: number

@@ -1,0 +1,40 @@
+{{ define "encoders" }}
+// HTTP encoders
+const contentType = "Content-Type"
+  {{- range .Resources }}
+    {{- template "encoder" . }}
+  {{ end }}
+{{ end }}
+
+{{ define "encoder" }}
+func encode{{ .Name }}Response(ctx context.Context, w http.ResponseWriter, response interface{}) error {
+  produces := []mime.Type{ {{range .Produces}}"{{.}}", {{ end }} }
+
+  resp := response.(_{{ camelizeDownFirst .Name}}Response)
+
+  {{ $resp :=firstOrDefault .Responses }}
+  {{ range $resp.Returns }}
+  {{ template "encode" . }}
+  {{ end }}
+  return nil
+}
+{{ end }}
+
+{{ define "encode" }}
+{{ if .Location }}
+ {{ if isFromLocation .Location "header" }}
+  w.Header().Add("{{.Name}}", resp.{{ .Name }})
+ {{ end }}
+ {{ if isFromLocation .Location "body" }}
+   newEnc, mt, err := encoders.ResponseEncoder(ctx, produces)
+   if err != nil {
+     return err
+   }
+   w.Header().Set(contentType, string(mt))
+   enc := newEnc(w)
+   if err := enc.Encode(resp.{{ normalize .Name }}); err != nil {
+     return err
+   }
+ {{ end }}
+{{ end }}
+{{ end }}

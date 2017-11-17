@@ -1,0 +1,12 @@
+{{ define "responses" }}
+  {{ range .Resources }}
+    // _{{ camelizeDownFirst .Name}}Response is not to be used outside of this file.
+    // see https://gokit.io/examples/stringsvc.html#requests-and-responses for more detail
+    type _{{ camelizeDownFirst .Name}}Response struct {
+      {{ $resp :=  firstOrDefault .Responses }}
+      {{ range  $resp.Returns }}
+      {{ template "field" .}}
+      {{ end }}
+    }
+  {{ end }}
+{{ end }}

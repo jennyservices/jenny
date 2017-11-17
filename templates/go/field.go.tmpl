@@ -1,0 +1,11 @@
+{{ define "field" -}}
+{{ template "ident" .}}{{if .Description}} {{ template "tag" .}} // {{.Description }} {{ end }}
+{{- end }}
+
+{{ define "tag" -}}
+`json:"{{ .CannonicalName }}{{if eq .Required false }},omitempty{{ end }}"`
+{{- end }}
+
+{{ define "ident" -}}
+{{ normalize .Name }} {{if eq .Required false  }}{{end}}{{ getType . }}
+{{- end }}

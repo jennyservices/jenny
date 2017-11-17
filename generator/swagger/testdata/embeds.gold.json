@@ -1,0 +1,21 @@
+{
+	"kind": "jenny.io/service",
+	"etag": "75bc9a326cfa874d3c5f19529a30eb6fb80794c8a9fc3e5550d2b1b43d66b1d2",
+	"discoveryVersion": "v0",
+	"id": "testerino:v0.0.0",
+	"name": "testerino",
+	"canonicalName": "testerino",
+	"version": "0.1",
+	"revision": "TEST",
+	"title": "testerino",
+	"description": "test",
+	"ownerDomain": "",
+	"ownerName": "",
+	"documentationLink": "https://localhost:8080/_spec",
+	"protocol": "http",
+	"baseUrl": "api.typeform.tf",
+	"basePath": "/results",
+	"rootUrl": "",
+	"servicePath": "",
+	"batchPath": ""
+}
