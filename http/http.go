@@ -96,6 +96,12 @@ const (
 
 	// ConetxtKeyContentType is the X-Debug-ID header
 	ConetxtKeyContentType
+
+	// ContextKeyRequestHeaders is the request headers
+	ContextKeyRequestHeaders
+
+	// ContextKeyUserAgent is the UserAgent in request
+	ContextKeyUserAgent
 )
 
 // ContextCookie return a cookie that was in the http.Request
@@ -112,18 +118,18 @@ func ContextCookie(ctx context.Context, name string) *http.Cookie {
 	return nil
 }
 
-func getID(r *http.Request) string {
+func getID(r *http.Request) []byte {
 	reqID := r.Header.Get("X-Request-Id")
 	if reqID != "" {
-		return reqID
+		return []byte(reqID)
 	}
 	id := ulid.MustNew(ulid.Timestamp(time.Now()), rand.Reader)
-	return id.String()
+	return id.Entropy()
 }
 
 // ContextRequestID returns a unique id for the request
-func ContextRequestID(ctx context.Context) string {
-	return ctx.Value(ContextKeyID).(string)
+func ContextRequestID(ctx context.Context) []byte {
+	return ctx.Value(ContextKeyID).([]byte)
 }
 
 // ErrCouldntFindAccepts is returned when Accept mimeTypes can't be found in the header
@@ -143,17 +149,19 @@ func PopulateRequestContext(ctx context.Context, r *http.Request) context.Contex
 		ContextKeyRequestMethod:          r.Method,
 		ContextKeyRequestURI:             r.RequestURI,
 		ContextKeyRequestPath:            r.URL.Path,
-		ContextKeyRequestURL:             r.URL.String(),
+		ContextKeyRequestURL:             r.URL,
 		ContextKeyRequestProto:           r.Proto,
 		ContextKeyRequestHost:            r.Host,
 		ContextKeyRequestRemoteAddr:      r.RemoteAddr,
 		ContextKeyRequestXForwardedFor:   r.Header.Get("X-Forwarded-For"),
 		ContextKeyRequestXForwardedProto: r.Header.Get("X-Forwarded-Proto"),
 		ContextKeyRequestAuthorization:   r.Header.Get("Authorization"),
-		ContextKeyRequestReferer:         r.Header.Get("Referer"),
-		ContextKeyRequestUserAgent:       r.Header.Get("User-Agent"),
+		ContextKeyRequestReferer:         r.Referer(),
+		ContextKeyRequestUserAgent:       r.UserAgent(),
 		ContextKeyRequestXRequestID:      r.Header.Get("X-Request-Id"),
 		ContextKeyRequestAccept:          r.Header.Get("Accept"),
+		ContextKeyRequestHeaders:         r.Header,
+		ContextKeyUserAgent:              r.UserAgent(),
 		ContextKeyCookies:                r.Cookies(),
 		ContextKeyID:                     getID(r),
 		ContextKeyAccepts:                mime.RequestTypes(r),
