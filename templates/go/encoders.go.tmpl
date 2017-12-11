@@ -8,11 +8,14 @@ const contentType = "Content-Type"
 
 {{ define "encoder" }}
 func encode{{ .Name }}Response(ctx context.Context, w http.ResponseWriter, response interface{}) error {
-  produces := []mime.Type{ {{range .Produces}}"{{.}}", {{ end }} }
-
+  {{ with .Produces}}
+  produces := []mime.Type{ {{range .}}"{{.}}", {{ end }} }
+  {{ end }}
   resp := response.(_{{ camelizeDownFirst .Name}}Response)
 
   {{ $resp :=firstOrDefault .Responses }}
+  statusCode := {{ $resp.HTTPStatus }}
+
   {{ range $resp.Returns }}
   {{ template "encode" . }}
   {{ end }}
@@ -25,6 +28,8 @@ func encode{{ .Name }}Response(ctx context.Context, w http.ResponseWriter, respo
  {{ if isFromLocation .Location "header" }}
   w.Header().Add("{{.Name}}", resp.{{ .Name }})
  {{ end }}
+ w.WriteHeader(statusCode)
+
  {{ if isFromLocation .Location "body" }}
    newEnc, mt, err := encoders.ResponseEncoder(ctx, produces)
    if err != nil {

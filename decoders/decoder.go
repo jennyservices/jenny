@@ -13,7 +13,6 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"strings"
 
 	"github.com/Typeform/jenny/mime"
 	"github.com/gorilla/schema"
@@ -35,7 +34,7 @@ var (
 	FormDecoder = func(r *http.Request) Decoder {
 		return &formDecoder{r: r}
 	}
-	decoders = map[string]newDecoder{
+	decoders = map[mime.Type]newDecoder{
 		mime.ApplicationJSON:           JSONDecoder,
 		mime.ApplicationXML:            XMLDecoder,
 		mime.ApplicationFormURLEncoded: FormDecoder,
@@ -44,7 +43,7 @@ var (
 
 // Register registers a new decoder to be used with jenny endpoints, it is to be
 // recalled based on the mime-type
-func Register(d newDecoder, s string) {
+func Register(s mime.Type, d newDecoder) {
 	decoders[s] = d
 }
 
@@ -85,25 +84,24 @@ func (f *formDecoder) Decode(i interface{}) error {
 }
 
 // RequestDecoder returns a decoder for a given http.Request
-func RequestDecoder(r *http.Request, accepts []string) (Decoder, error) {
-	var guesses []string
-	var contentType []string
-	var ok bool
-	if contentType, ok = r.Header["Content-Type"]; ok {
-		guesses = append(guesses, contentType...)
-	}
-	// buf := make([]byte, 512)
-	// r.Body.Read(buf)
-	// guesses = append(guesses, http.DetectContentType(buf))
-	for _, guess := range guesses {
-		for _, accepted := range accepts {
-			if guess == accepted {
-				if newDec, ok := decoders[accepted]; ok {
-					return newDec(r), nil
-				}
-			}
+func RequestDecoder(r *http.Request, accepts []mime.Type) (Decoder, error) {
+	serverAccepts := mime.Aggregate(accepts)
+	clientSent := mime.NewTypes(r.Header.Get("Content-Type"))
+	available := mime.Intersect(serverAccepts, clientSent)
+	var dec Decoder
+	err := available.Walk(func(x mime.Type) error {
+		if decoderFunc, ok := decoders[x]; ok {
+			dec = decoderFunc(r)
+			return nil
 		}
+		return fmt.Errorf("%s isn't a registered decoder", x)
+
+	})
+	if err != nil {
+		return nil, err
 	}
-	desc := fmt.Sprintf("(%s) are not valid content types for this request, try any of (%s)", strings.Join(contentType, ", "), strings.Join(accepts, ", "))
-	return nil, errors.New(desc)
+	if dec == nil {
+		return nil, errors.New("coudln't find decoder")
+	}
+	return dec, nil
 }
