@@ -154,6 +154,9 @@ func ResponseEncoder(ctx context.Context, accepts []mime.Type) (newEnc NewEncode
 	available := mime.Intersect(serverGraph, clientGraph)
 
 	err = available.Walk(func(s mime.Type) error {
+		if newEnc != nil {
+			return nil
+		}
 		if nef, ok := encoders[s]; ok {
 			newEnc = nef
 			mimeType = s
@@ -167,7 +170,7 @@ func ResponseEncoder(ctx context.Context, accepts []mime.Type) (newEnc NewEncode
 	}
 
 	if newEnc == nil || mimeType == "" {
-		return nil, "", fmt.Errorf("your client does not accept mimeTypes that this endpoint supports. accepted values are  %s", accepts)
+		return encoders[mime.ApplicationOctet], mime.ApplicationOctet, nil
 	}
 	return newEnc, mimeType, nil
 }
