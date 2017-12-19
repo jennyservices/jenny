@@ -1,0 +1,10 @@
+{
+  "docs": {
+    "Docusaurus": ["readme"],
+    "Design": ["generator","conventions", "debug"],
+    "API": [ "options",  "auth"]
+  },
+  "tutorials": {
+    "User-Service": ["user-service-1", "user-service-2"]
+  }
+}

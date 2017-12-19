@@ -1,4 +1,8 @@
-## User Service
+---
+id: user-service
+title: User Service
+sidebar_label: User Service Tutorails
+---
 
 * [User Service 1](user-service-1.md) ― Setting up a sample server that does
   nothing ([files](https://github.com/sevki/user/tree/tutorial-1))

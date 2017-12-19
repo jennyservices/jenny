@@ -1,4 +1,8 @@
-# Generator
+---
+id: generator
+title: Generator
+sidebar_label: Generator
+---
 
 ## Design
 

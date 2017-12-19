@@ -21,9 +21,14 @@ import (
 const contentType = "Content-Type"
 
 func encodeGetServiceResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
+
 	produces := []mime.Type{"application/octet-stream"}
 
 	resp := response.(_getServiceResponse)
+
+	statusCode := 200
+
+	w.WriteHeader(statusCode)
 
 	newEnc, mt, err := encoders.ResponseEncoder(ctx, produces)
 	if err != nil {
@@ -39,9 +44,14 @@ func encodeGetServiceResponse(ctx context.Context, w http.ResponseWriter, respon
 }
 
 func encodeGetTripResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
+
 	produces := []mime.Type{"application/json", "application/x-www-form-urlencoded"}
 
 	resp := response.(_getTripResponse)
+
+	statusCode := 200
+
+	w.WriteHeader(statusCode)
 
 	newEnc, mt, err := encoders.ResponseEncoder(ctx, produces)
 	if err != nil {
@@ -57,9 +67,14 @@ func encodeGetTripResponse(ctx context.Context, w http.ResponseWriter, response 
 }
 
 func encodeRunResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
+
 	produces := []mime.Type{"application/json", "application/x-www-form-urlencoded"}
 
 	resp := response.(_runResponse)
+
+	statusCode := 200
+
+	w.WriteHeader(statusCode)
 
 	newEnc, mt, err := encoders.ResponseEncoder(ctx, produces)
 	if err != nil {
@@ -75,9 +90,14 @@ func encodeRunResponse(ctx context.Context, w http.ResponseWriter, response inte
 }
 
 func encodeServicesResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
+
 	produces := []mime.Type{"application/json", "application/xml"}
 
 	resp := response.(_servicesResponse)
+
+	statusCode := 200
+
+	w.WriteHeader(statusCode)
 
 	newEnc, mt, err := encoders.ResponseEncoder(ctx, produces)
 	if err != nil {
@@ -93,9 +113,14 @@ func encodeServicesResponse(ctx context.Context, w http.ResponseWriter, response
 }
 
 func encodeTripsResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
+
 	produces := []mime.Type{"application/json", "application/x-www-form-urlencoded"}
 
 	resp := response.(_tripsResponse)
+
+	statusCode := 200
+
+	w.WriteHeader(statusCode)
 
 	newEnc, mt, err := encoders.ResponseEncoder(ctx, produces)
 	if err != nil {

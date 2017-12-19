@@ -1,4 +1,8 @@
-# User Service 1 ― Setting up a sample server that does
+---
+id: user-service-1
+title: User Service-1
+sidebar_label: User Service Tutorial-1 setting up server
+---
 
 Let's start by creating our first swagger definition.
 

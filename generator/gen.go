@@ -74,6 +74,11 @@ func (g *Generator) Generate() error {
 			encoder:  Golang,
 			template: "servicehttp",
 		},
+		"client": {
+			file:     fmt.Sprintf("%s_client.js", g.filePrefix),
+			encoder:  JS,
+			template: "client",
+		},
 	} {
 		f, err := os.Create(filepath.Join(g.out, output.file))
 		if err != nil {

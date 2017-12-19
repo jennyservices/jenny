@@ -1,4 +1,8 @@
-# Jenny
+---
+id: readme
+title: Introduction
+sidebar_label: Introduction
+---
 
 _Jenny the Generator_ is a toolkit developed by [Typeform](http://typeform.com)
 for rapid development of production ready services.

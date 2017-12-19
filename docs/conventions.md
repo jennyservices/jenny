@@ -1,4 +1,8 @@
-# Conventions
+---
+id: conventions
+title: Conventions
+sidebar_label: Conventions
+---
 
 ## Organazing code
 

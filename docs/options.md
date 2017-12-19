@@ -1,4 +1,8 @@
-# Options
+---
+id: options
+title: Options
+sidebar_label: Options
+---
 
 ## Design
 
@@ -9,7 +13,7 @@ patterns established in `go-kit`.
 
 There is a certain order which the options package would chain your middlewares
 
-```
+```text
 Current ordering of the middlewares goes as follows
 
 Request

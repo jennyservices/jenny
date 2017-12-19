@@ -1,4 +1,8 @@
-# Debug [WIP]
+---
+id: debug
+title: Debug
+sidebar_label: Debug
+---
 
 Jenny has a debug mode, where you can inspect requests, save and replay them,
 but more impressively it can generate tests from saved requests.

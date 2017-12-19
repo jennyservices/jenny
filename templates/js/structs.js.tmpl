@@ -1,12 +1,12 @@
 {{ define "structs" }}
 
 {{ range .Schemas }}
-type {{ .Name}} {
+type {{ .Name}} = {
   {{ range .Properties }}{{ template "field" .}}{{ end -}}
 }
 {{ end }}
 {{ end }}
 
 
-{{- define "field" }}  {{ .Name }}{{if .Required}}?{{end}}: {{ .Type }}
+{{- define "field" }}  {{ .Name }}{{if .Required}}?{{end}}: {{ .Type }},
 {{ end }}

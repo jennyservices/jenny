@@ -8,11 +8,14 @@ import (
 	"go/build"
 	"html/template"
 	"io"
+	"log"
 	"path"
 	"strings"
 
 	"github.com/Typeform/jenny/generator/internal/ir"
+	"github.com/Typeform/jenny/generator/util"
 	"github.com/go-openapi/inflect"
+	"sevki.org/lib/prettyprint"
 )
 
 var (
@@ -21,9 +24,55 @@ var (
 		"join":              strings.Join,
 		"camelizeDownFirst": camelizeDownFirst,
 		"camelize":          inflect.Camelize,
+		"normalize":         util.NormalizeName,
 		"titleize":          inflect.Titleize,
+		"getType":           getType,
+		"firstOrDefault":    firstOrDefault,
+		"isFromLocation": func(p *string, s string) bool {
+			if p != nil && s == *p {
+				return true
+			}
+			return false
+		},
 	}
 )
+
+func parseType(s string) string {
+	isArray := false
+	if strings.HasPrefix(s, "[]") {
+		isArray = true
+		s = strings.TrimLeft(s, "[]")
+	}
+	_, f := path.Split(s)
+	if isArray {
+		return "[]" + f
+	}
+	return f
+}
+
+func getType(schema ir.Schema) string {
+	log.Println(prettyprint.AsJSON(schema))
+	return parseType(schema.Type)
+}
+func firstOrDefault(m map[string]ir.Response) ir.Response {
+
+	r := ir.Response{
+		Default:    true,
+		Error:      false,
+		HTTPStatus: 200,
+		Returns:    map[string]ir.Schema{},
+	}
+	for _, s := range m {
+		r = s
+		break
+	}
+	for _, s := range m {
+		if s.Default {
+			return s
+		}
+	}
+	return r
+}
 
 // New returns a new goWriter
 func New(w io.Writer, template string) ir.Encoder {

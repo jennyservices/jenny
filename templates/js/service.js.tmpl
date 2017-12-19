@@ -1,0 +1,36 @@
+{{ define "service" }}
+
+class Fetcher {
+  baseURL: string;
+  constructor(baseurl: string) {
+    this.baseURL= baseurl;
+  }
+}
+
+class {{.Name }}Client {
+  constructor() {
+    super("{{.BaseURL}}")
+  }
+{{ range .Resources }}
+  {{ template "endpoint" . }}
+{{ end }}
+}
+{{ end }}
+
+
+
+
+{{ define "endpoint" -}}
+{{ .Name }}({{ range .Parameters }} {{template "ident" .}},{{ end }}) : {{ template "responses" . }}  {}
+{{- end }}
+
+{{ define "responses" -}}
+{{- $resp :=  firstOrDefault .Responses -}}
+{{- range $resp.Returns -}}
+{{ getType . }}
+{{- end -}}
+{{- end }}
+
+{{ define "ident" -}}
+{{ .Name }}: {{ .Type }}
+{{- end }}
