@@ -1,7 +1,7 @@
-# Jenny
+# <img src="https://musing-jepsen-d55010.netlify.com/img/jenny.svg" height="70" />
 
-_Jenny the Generator_ is a code generation tool developed at Typeform for
-generating code from service descriptions.
+**Jenny** _the Generator_ are the set of tools developed at Typeform for rapid
+development of production ready micro-services.
 
 ## Documentation
 
@@ -37,7 +37,7 @@ for details.
 
 ## Maintainers
 
-* [sevki](https://github.com/Typeform/jenny)
+* [sevki](https://github.com/sevki)
 
 ---
 
