@@ -4,8 +4,6 @@ title: Generator
 sidebar_label: Generator
 ---
 
-## Design
-
 Generator takes a service definition and generates code for it. For instance
 given a swagger definition the code generation pipeline takes the swagger spec
 and converts it in to a Intermediary Representation (`IR` for short). ServiceIR

@@ -4,36 +4,21 @@ title: Introduction
 sidebar_label: Introduction
 ---
 
-_Jenny the Generator_ is a toolkit developed by [Typeform](http://typeform.com)
-for rapid development of production ready services.
+**Jenny** _the Generator_ are the set of tools developed at Typeform for rapid
+development of production ready micro-services.
 
-## Design
+To get started you'll need [`Go`](https://golang.org/dl/) and that's pretty much
+it. After you install `Go` go get `jenny` by;
 
-_Jenny_ is designed with one thing in mind, **production**!
+```bash
+go get github.com/Typeform/jenny/cmd/jenny
+```
 
-It achieves production readiness with two main principles;
+## [Tutorials](tutorials.md)
 
-1. Spec 1st
-2. Prod for dev.
+* [User Service](user-service-1.md)
 
-**Spec 1st**: When we talk about Spec 1st, we don't talk about a particular
-technology like `swagger` or `gRPC`, we talk about an interface that people
-involved in development can work with. For **Typeform**, this is `swagger`, for
-Google it's `gRPC` (amongst others), for your startup it could be a XML Service
-spec you had lying around from `SOAP` days, only requirement for a service spec
-is that it's a machine parse-able data format. We use this parse-able format to
-generate everything from documentation to server and client code. This ensures
-that everything we do is consistent and well documented.
-
-**Prod for dev**: Jenny's follows modern "cloud development" conventions and
-provides services that you are likely going to find in modern production
-environments.
-
-For example, `debug` mode does hot-reloading for your services, it uses your
-services `/_health` endpoint to switch between the services during hot-reload.
-Jenny also provides `tracing` capabilities in the debug console.
-
-Design decisions and more are discussed in individual components sections
+## [Design](design.md)
 
 * [Generator](generator.md)
 * [Debug](debug.md) [WIP, Help Wanted!]
@@ -47,7 +32,3 @@ Design decisions and more are discussed in individual components sections
 1. Open Source Jenny
 2. Discuss Plug-ins Architecture
 3. Refactor dashboard code with generated JS
-
-## [Tutorials](tutorials)
-
-* [User Service](tutorials/userservice)

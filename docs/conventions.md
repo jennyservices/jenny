@@ -4,8 +4,6 @@ title: Conventions
 sidebar_label: Conventions
 ---
 
-## Organazing code
-
 A basic Jenny project has 3 packages;
 
 1. `cmd` for keeping the main executable.

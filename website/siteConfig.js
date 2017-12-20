@@ -21,18 +21,20 @@ const siteConfig = {
   tagline: 'the generator',
   url: 'https://typeform.github.io' /* your website url */,
   baseUrl: '/jenny/' /* base url for your project */,
+  organizationName: 'Typeform',
   projectName: 'jenny',
   headerLinks: [
     { doc: 'readme', label: 'Docs' },
     { doc: 'options', label: 'API' },
+    { doc: 'tutorials', label: 'Tutorials' },
     { page: 'help', label: 'Help' },
     { blog: true, label: 'Blog' }
   ],
   users,
   /* path to images for header/footer */
-  headerIcon: 'img/glance-girl.png',
-  footerIcon: 'img/glance-girl.png',
-  favicon: 'img/glance-girl.png',
+  headerIcon: 'img/jenny.svg',
+  footerIcon: 'img/jenny.svg',
+  favicon: 'img/jenny.png',
   /* colors for website */
   colors: {
     primaryColor: '#262627',

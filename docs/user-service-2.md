@@ -1,7 +1,7 @@
 ---
 id: user-service-2
-title: User Service-2
-sidebar_label: User Service Tutorial-2 Adding a datastore
+title: Adding a datastore
+sidebar_label: Adding a datastore
 ---
 
 ## Getting some use out of our user package

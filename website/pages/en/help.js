@@ -18,15 +18,17 @@ class Help extends React.Component {
     const supportLinks = [
       {
         content:
-          'Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)',
+          'Learn more using the [documentation on this site.](/jenny/docs/readme.html)',
         title: 'Browse Docs'
       },
       {
-        content: 'Ask questions about the documentation and project',
+        content:
+          'Ask questions about the jenny on our [mailing list.](https://groups.google.com/forum/#!forum/jenny-dev)',
         title: 'Join the community'
       },
       {
-        content: "Find out what's new with this project",
+        content:
+          "Find out what's new with jenny on our [blog](http://engineering.typeform.com/jenny/blog/)",
         title: 'Stay up to date'
       }
     ];
@@ -36,8 +38,25 @@ class Help extends React.Component {
         <Container className="mainContainer documentContainer postContainer">
           <div className="post">
             <header className="postHeader">
-              <h2>Need help?</h2>
+              <h2>Want to help?</h2>
             </header>
+            <p>
+              Please visit our{' '}
+              <a href="https://github.com/Typeform/jenny/blob/master/CONTRIBUTING.md">
+                contribution guidelines
+              </a>{' '}
+              to see how you can start helping.
+            </p>
+            <p>
+              Issues
+              <ul>
+                <li>
+                  <a href="https://github.com/Typeform/jenny/issues?q=is%3Aissue+is%3Aopen+label%3Abeginner">
+                    Beginner issues
+                  </a>
+                </li>
+              </ul>
+            </p>
             <p>This project is maintained by a dedicated group of people;</p>
             <ul>
               <li>

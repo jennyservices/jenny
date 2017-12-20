@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>jenny Blog</title>
+        <link>https://typeform.github.io/blog</link>
+        <description>The best place to stay up-to-date with the latest jenny news and events.</description>
+        <lastBuildDate>Fri, 11 Mar 2016 06:00:00 GMT</lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <generator>Feed for Node.js</generator>
+        <image>
+            <title>jenny Blog</title>
+            <url>https://typeform.github.ioimg/jenny.svg</url>
+            <link>https://typeform.github.io/blog</link>
+        </image>
+        <copyright>Copyright © 2017Typeform SL</copyright>
+        <item>
+            <title><![CDATA[Introducing Jenny]]></title>
+            <link>https://typeform.github.io/blog/2016/03/11/blog-post.html</link>
+            <guid>https://typeform.github.io/blog/2016/03/11/blog-post.html</guid>
+            <pubDate>Fri, 11 Mar 2016 06:00:00 GMT</pubDate>
+            <description><![CDATA[I am extremely proud to announce today we are open-sourcing "jenny", our toolkit
+for developing micro-services at [Typeform](https://typeform.com).
+
+## What is jenny?
+
+jenny are the collection of tools and utilities we use at [Typeform](https://typef]]></description>
+        </item>
+    </channel>
+</rss>

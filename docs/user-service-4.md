@@ -1,4 +1,8 @@
-# User Service 4 ― Adding integration tests
+---
+id: user-service-4
+title: Adding integration tests
+sidebar_label: Adding integration tests
+---
 
 ## Adding integration tests
 

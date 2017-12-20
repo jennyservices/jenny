@@ -1,10 +1,11 @@
 {
   "docs": {
-    "Docusaurus": ["readme"],
-    "Design": ["generator","conventions", "debug"],
+    "Jenny": ["readme"],
+    "Design": ["design","generator","conventions", "debug"],
     "API": [ "options",  "auth"]
   },
   "tutorials": {
-    "User-Service": ["user-service-1", "user-service-2"]
+    "Tutorials": ["tutorials"],
+    "User-Service": ["user-service-1", "user-service-2","user-service-3","user-service-4"]
   }
 }

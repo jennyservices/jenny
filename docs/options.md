@@ -4,8 +4,6 @@ title: Options
 sidebar_label: Options
 ---
 
-## Design
-
 Options package provides some opinionated middlewares for your `Go` service,
 where possible it follows the
 [`middleware`](https://godoc.org/github.com/go-kit/kit/endpoint#Middleware)

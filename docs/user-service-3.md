@@ -1,4 +1,8 @@
-# User Service 3 ― Adding unit tests and mocks
+---
+id: user-service-3
+title: Adding unit tests and mocks
+sidebar_label: Adding unit tests and mocks
+---
 
 First get go's mock utils
 

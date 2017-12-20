@@ -1,7 +1,7 @@
 ---
 id: user-service-1
-title: User Service-1
-sidebar_label: User Service Tutorial-1 setting up server
+title: Setting up the Server
+sidebar_label: Setting up the Server
 ---
 
 Let's start by creating our first swagger definition.

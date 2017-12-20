@@ -1,16 +1,15 @@
 {{ define "service" }}
+import { createStore } from 'redux'
 
-class Fetcher {
-  baseURL: string;
-  constructor(baseurl: string) {
-    this.baseURL= baseurl;
-  }
-}
+{{ range .Resources }}
+{{ .Name}} = "{{.Name}}"
+{{ end}}
 
 class {{.Name }}Client {
   constructor() {
-    super("{{.BaseURL}}")
+    super( )
   }
+  baseURL = "{{.BaseURL}}"
 {{ range .Resources }}
   {{ template "endpoint" . }}
 {{ end }}
@@ -21,7 +20,15 @@ class {{.Name }}Client {
 
 
 {{ define "endpoint" -}}
-{{ .Name }}({{ range .Parameters }} {{template "ident" .}},{{ end }}) : {{ template "responses" . }}  {}
+
+{{ .Name }}({{ range .Parameters }} {{template "ident" .}},{{ end }}) : {{ template "responses" . }}  {
+  return {
+    type: {{ .Name }},
+    header: { {{ range .Parameters }} {{- if isFromLocation .Location "header" }} {{template "ident" .}},{{ end }} {{ end }} },
+    query: { {{ range .Parameters }} {{- if isFromLocation .Location "query" }} {{template "ident" .}},{{ end }} {{ end }} },
+    path: { {{ range .Parameters }} {{- if isFromLocation .Location "path" }} {{template "ident" .}},{{ end }} {{ end }} }
+   }
+}
 {{- end }}
 
 {{ define "responses" -}}
@@ -32,5 +39,5 @@ class {{.Name }}Client {
 {{- end }}
 
 {{ define "ident" -}}
-{{ .Name }}: {{ .Type }}
+{{ .Name }}: {{ getType . }}
 {{- end }}

@@ -45,7 +45,7 @@ func parseType(s string) string {
 	}
 	_, f := path.Split(s)
 	if isArray {
-		return "[]" + f
+		return f + "[]"
 	}
 	return f
 }

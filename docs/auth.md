@@ -4,8 +4,6 @@ title: Auth
 sidebar_label: Auth
 ---
 
-## Design
-
 Jenny uses `go-kit` as a base framework for all the services it generates, but
 it is a bit opinionated when it comes to using `go-kit` concepts.
 

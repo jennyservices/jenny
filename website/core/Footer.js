@@ -23,33 +23,13 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>Docs</h5>
-            <a
-              href={
-                this.props.config.baseUrl +
-                'docs/' +
-                this.props.language +
-                '/doc1.html'
-              }>
-              Getting Started (or other categories)
+            <a href={this.props.config.baseUrl + 'docs/readme.html'}>
+              Getting Started
             </a>
-            <a
-              href={
-                this.props.config.baseUrl +
-                'docs/' +
-                this.props.language +
-                '/doc2.html'
-              }>
-              Guides (or other categories)
+            <a href={this.props.config.baseUrl + 'docs/tutorials.html'}>
+              Tutorials{' '}
             </a>
-            <a
-              href={
-                this.props.config.baseUrl +
-                'docs/' +
-                this.props.language +
-                '/doc3.html'
-              }>
-              API Reference (or other categories)
-            </a>
+            <a href={'https://godoc.org/github.com/Typeform/jenny'}>Go Docs</a>
           </div>
           <div>
             <h5>Community</h5>
@@ -59,20 +39,19 @@ class Footer extends React.Component {
               }>
               User Showcase
             </a>
+
             <a
-              href="http://stackoverflow.com/questions/tagged/"
+              href="https://groups.google.com/forum/#!forum/jenny-dev"
               target="_blank">
-              Stack Overflow
+              Mailing List
             </a>
-            <a href="https://discordapp.com/">Project Chat</a>
-            <a href="https://twitter.com/" target="_blank">
-              Twitter
+            <a href="https://github.com/typeform/jenny/issues" target="_blank">
+              Issues
             </a>
           </div>
           <div>
             <h5>More</h5>
             <a href={this.props.config.baseUrl + 'blog'}>Blog</a>
-            <a href="https://github.com/">GitHub</a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}

@@ -37,7 +37,7 @@ class HomeSplash extends React.Component {
         <div className="homeSplashFade">
           <div className="wrapper homeWrapper">
             <div className="projectLogo">
-              <img src={siteConfig.baseUrl + 'img/glance-girl.png'} />
+              <img src={siteConfig.baseUrl + 'img/jenny.svg'} />
             </div>
             <div className="inner">
               <h2 className="projectTitle">
@@ -48,7 +48,10 @@ class HomeSplash extends React.Component {
                 <div className="promoRow">
                   <div className="pluginRowBlock">
                     <Button href={siteConfig.baseUrl + 'docs' + '/readme.html'}>
-                      Get Started{' '}
+                      Get Started
+                    </Button>
+                    <Button href={'https://github.com/Typeform/jenny'}>
+                      GitHub
                     </Button>
                   </div>
                 </div>
@@ -107,15 +110,18 @@ class Index extends React.Component {
             className="productShowcaseSection paddingBottom"
             style={{ textAlign: 'center' }}>
             <h2>Production Ready!</h2>
-            <MarkdownBlock>These are features of this project</MarkdownBlock>
+            <MarkdownBlock>
+              Built on top of [go-kit](http://gokit.io/) jenny services are
+              production ready!
+            </MarkdownBlock>
           </div>
 
-          <Container padding={['bottom', 'top']} background="light">
+          {/*          <Container padding={['bottom', 'top']} background="light">
             <GridBlock
               contents={[
                 {
                   content: 'Talk about learning how to use this',
-                  image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                  image: siteConfig.baseUrl + 'img/jenny-code-gen.png',
                   imageAlign: 'right',
                   title: 'Learn How'
                 }
@@ -127,10 +133,11 @@ class Index extends React.Component {
             <GridBlock
               contents={[
                 {
-                  content: 'Talk about trying this out',
-                  image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                  content:
+                    "Jenny takes a service definition and generates code for you, currently it supports generating server-side Go code with JS on the way. You can write your own code generators to extend jenny's code generation capabilities.",
+                  image: siteConfig.baseUrl + 'img/jenny-code-gen.png',
                   imageAlign: 'left',
-                  title: 'Try it Out'
+                  title: 'Generate Code'
                 }
               ]}
             />
@@ -144,11 +151,11 @@ class Index extends React.Component {
                     'This is another description of how this project is useful',
                   image: siteConfig.baseUrl + 'img/docusaurus.svg',
                   imageAlign: 'right',
-                  title: 'Description'
+                  title: 'Debug'
                 }
               ]}
             />
-          </Container>
+          </Container>*/}
 
           <div className="productShowcaseSection paddingBottom">
             <h2>{"Who's Using This?"}</h2>
