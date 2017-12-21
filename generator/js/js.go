@@ -8,14 +8,12 @@ import (
 	"go/build"
 	"html/template"
 	"io"
-	"log"
 	"path"
 	"strings"
 
 	"github.com/Typeform/jenny/generator/internal/ir"
 	"github.com/Typeform/jenny/generator/util"
 	"github.com/go-openapi/inflect"
-	"sevki.org/lib/prettyprint"
 )
 
 var (
@@ -28,6 +26,8 @@ var (
 		"titleize":          inflect.Titleize,
 		"getType":           getType,
 		"firstOrDefault":    firstOrDefault,
+		"tableize":          tableUpper,
+		"uppertable":        strings.ToUpper,
 		"isFromLocation": func(p *string, s string) bool {
 			if p != nil && s == *p {
 				return true
@@ -37,6 +37,9 @@ var (
 	}
 )
 
+func tableUpper(s string) string {
+	return strings.ToUpper(inflect.Tableize(s))
+}
 func parseType(s string) string {
 	isArray := false
 	if strings.HasPrefix(s, "[]") {
@@ -51,9 +54,9 @@ func parseType(s string) string {
 }
 
 func getType(schema ir.Schema) string {
-	log.Println(prettyprint.AsJSON(schema))
 	return parseType(schema.Type)
 }
+
 func firstOrDefault(m map[string]ir.Response) ir.Response {
 
 	r := ir.Response{

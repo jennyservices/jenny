@@ -1,9 +1,14 @@
 {{ define "service" }}
 import { createStore } from 'redux'
+import fetch from 'cross-fetch'
 
 {{ range .Resources }}
-{{ .Name}} = "{{.Name}}"
-{{ end}}
+export const {{tableize .Name}} = "{{tableize .Name}}";
+export const REQUEST_{{tableize .Name}} = "REQUEST_{{tableize .Name}}";
+export const RECIEVE_{{tableize .Name}} = "RECIEVE_{{tableize .Name}}";
+export const INVALIDATE_{{tableize .Name}} = "FETCH_{{tableize .Name}}";
+
+{{- end}}
 
 class {{.Name }}Client {
   constructor() {
@@ -20,14 +25,24 @@ class {{.Name }}Client {
 
 
 {{ define "endpoint" -}}
-
-{{ .Name }}({{ range .Parameters }} {{template "ident" .}},{{ end }}) : {{ template "responses" . }}  {
+request{{ .Name }}({{ range .Parameters }} {{template "ident" .}},{{ end }}) : {{ template "responses" . }}  {
   return {
-    type: {{ .Name }},
+    type: REQUEST_{{tableize .Name }},
     header: { {{ range .Parameters }} {{- if isFromLocation .Location "header" }} {{template "ident" .}},{{ end }} {{ end }} },
     query: { {{ range .Parameters }} {{- if isFromLocation .Location "query" }} {{template "ident" .}},{{ end }} {{ end }} },
     path: { {{ range .Parameters }} {{- if isFromLocation .Location "path" }} {{template "ident" .}},{{ end }} {{ end }} }
    }
+}
+fetch{{ .Name }}({{ range .Parameters }} {{template "ident" .}},{{ end }}) : {{ template "responses" . }}  {
+  return dispatch => {
+    dispatch(request{{.Name}}({{ range .Parameters }} {{.Name}},{{ end }}) )
+    return fetch(`{{.Path}}`)
+      .then(response => response.json())
+      .then(json => dispatch(recieve{{.Name}}({{ range .Parameters }} {{.Name}},{{ end }} json )))
+    }
+}
+{{ .Name }}({{ range .Parameters }} {{template "ident" .}},{{ end }}) : {{ template "responses" . }}  {
+
 }
 {{- end }}
 
