@@ -10,12 +10,12 @@ import (
 	"fmt"
 	"go/build"
 	"go/token"
-	"html/template"
 	"io"
 	"log"
 	"os"
 	"path"
 	"strings"
+	"text/template"
 
 	"github.com/Typeform/jenny/generator/internal/ir"
 	"github.com/Typeform/jenny/generator/util"
