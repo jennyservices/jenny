@@ -152,7 +152,9 @@ func ResponseEncoder(ctx context.Context, accepts []mime.Type) (newEnc NewEncode
 	serverGraph := mime.Aggregate(accepts)
 
 	available := mime.Intersect(serverGraph, clientGraph)
-
+	if len(available) < 1 { // if nothing intersects
+		available = serverGraph // server can do what ever it wants
+	}
 	err = available.Walk(func(s mime.Type) error {
 		if newEnc != nil {
 			return nil
