@@ -141,7 +141,7 @@ definitions:
   Response:
     properties:
       status:
-        type: integer
+        type: number
       body:
         type: string
         format: byte
@@ -176,7 +176,7 @@ definitions:
       method:
         type: string
       status:
-        type: integer
+        type: number
       operationId:
         type: string
       url:
