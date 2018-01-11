@@ -71,7 +71,7 @@ type Service struct {
 
 // Trip is generated from a swagger definition
 type Trip struct {
-	Duration    int64     `json:"duration"`           // duration is generated from a swagger definition
+	Duration    int       `json:"duration"`           // duration is generated from a swagger definition
 	ID          string    `json:"id"`                 // id is generated from a swagger definition
 	Method      string    `json:"method"`             // method is generated from a swagger definition
 	OperationID string    `json:"operationId"`        // operationId is generated from a swagger definition

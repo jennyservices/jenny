@@ -1,10 +1,8 @@
 {{ define "service" }}
-import fetch from 'cross-fetch'
-
-class {{.Name }}Client {
-  constructor() {
-    super( )
-  }
+export default class {{.Name }}Client {
+  constructor(baseurl: string) {
+    this.baseURL=baseurl
+   }
   baseURL = "{{.BaseURL}}"
 {{ range .Resources }}
   {{ template "endpoint" . }}
@@ -12,22 +10,23 @@ class {{.Name }}Client {
 }
 {{ end }}
 
-
-
-
 {{ define "endpoint" -}}
 async {{ .Name }}({{ range .Parameters }} {{template "ident" .}},{{ end }}) : Promise<{{  template "responses" . }}>  {
-  let data : {{ template "responses" . }}  =  await fetch(`{{.Path}}`);
+  let pathMaker = matchstick(this.baseURL+`{{.Path}}`, 'template');
+  let path = pathMaker.stick({ {{ range .Parameters }} {{ .CannonicalName }}: {{ .Name }},{{ end }} })
+  let u = url.parse(path)
+  let data : {{ template "responses" . }}  =  await fetch(path);
   return data
 }
 {{- end }}
 
 {{ define "responses" -}}
 {{- $resp :=  firstOrDefault .Responses -}}
-{{- range $resp.Returns -}}
-{{ getType . }}
-{{- end -}}
+  {{- range $resp.Returns -}}
+    {{ getType . }}
+  {{- end -}}
 {{- end }}
+
 
 {{ define "ident" -}}
 {{ .Name }}: {{ getType . }}

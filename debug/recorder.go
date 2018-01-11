@@ -304,7 +304,7 @@ func (ds *debugService) saveResponse(id string, resp *http.Response) {
 				URL:      trp.req.URL,
 				Status:   resp.StatusCode,
 				Method:   trp.req.Method,
-				Duration: trp.finish.Sub(trp.start).Nanoseconds(),
+				Duration: int(trp.finish.Sub(trp.start).Nanoseconds()),
 				Request:  &trp.req,
 				Response: &trp.resp,
 			}

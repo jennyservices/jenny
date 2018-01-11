@@ -45,7 +45,7 @@ func encodeGetServiceResponse(ctx context.Context, w http.ResponseWriter, respon
 
 func encodeGetTripResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
 
-	produces := []mime.Type{"application/json", "application/x-www-form-urlencoded"}
+	produces := []mime.Type{"application/json"}
 
 	resp := response.(_getTripResponse)
 
@@ -114,7 +114,7 @@ func encodeServicesResponse(ctx context.Context, w http.ResponseWriter, response
 
 func encodeTripsResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
 
-	produces := []mime.Type{"application/json", "application/x-www-form-urlencoded"}
+	produces := []mime.Type{"application/json"}
 
 	resp := response.(_tripsResponse)
 
@@ -229,7 +229,7 @@ func NewDebugHTTPServer(svc Debug, opts ...options.Option) http.Handler {
 	{
 		svcOptions.RegisterMiddleware("GetTrip",
 			encoders.AcceptsMustMatch([]mime.Type{
-				"application/json", "application/x-www-form-urlencoded",
+				"application/json",
 			}),
 		)
 
@@ -280,7 +280,7 @@ func NewDebugHTTPServer(svc Debug, opts ...options.Option) http.Handler {
 	{
 		svcOptions.RegisterMiddleware("Trips",
 			encoders.AcceptsMustMatch([]mime.Type{
-				"application/json", "application/x-www-form-urlencoded",
+				"application/json",
 			}),
 		)
 

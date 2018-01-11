@@ -28,7 +28,7 @@ func (ds *debugService) Trips(ctx context.Context) ([]v1.Trip, error) {
 			dec := gob.NewDecoder(buf)
 
 			t := v1.Trip{}
-			dec.Decode(t)
+			dec.Decode(&t)
 			t.Request = nil
 			t.Response = nil
 			//createTest(t)
