@@ -77,6 +77,15 @@ func (s *swaggerDecoder) decodeMethods() *errors.Group {
 				} else {
 					paramSchema.Type = param.Type
 				}
+				if param.Schema != nil {
+					schme, eg := s.swaggerToIR(name, methodName, param.Schema)
+					if eg.Errored() {
+						g.Add(eg)
+						continue
+					}
+					paramSchema = *schme
+				}
+
 				paramSchema.Required = param.Required
 				if param.Default != nil {
 					paramSchema.Default = String(fmt.Sprint(param.Default))
@@ -84,6 +93,7 @@ func (s *swaggerDecoder) decodeMethods() *errors.Group {
 				paramSchema.Order = i
 				paramSchema.ID = path.Join(x.ID, name)
 				paramSchema.Location = String(param.In)
+				paramSchema.CannonicalName = param.Name
 				x.Parameters[name] = paramSchema
 			}
 			if method.Responses != nil {
