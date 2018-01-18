@@ -8,6 +8,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/Typeform/jenny/decoders"
 	"github.com/Typeform/jenny/encoders"
 	"github.com/Typeform/jenny/mime"
 	"github.com/Typeform/jenny/options"
@@ -48,6 +49,29 @@ func encodeGetTripResponse(ctx context.Context, w http.ResponseWriter, response 
 	produces := []mime.Type{"application/json"}
 
 	resp := response.(_getTripResponse)
+
+	statusCode := 200
+
+	w.WriteHeader(statusCode)
+
+	newEnc, mt, err := encoders.ResponseEncoder(ctx, produces)
+	if err != nil {
+		return err
+	}
+	w.Header().Set(contentType, string(mt))
+	enc := newEnc(w)
+	if err := enc.Encode(resp.Body); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func encodeNewErrorResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
+
+	produces := []mime.Type{"application/json", "application/x-www-form-urlencoded"}
+
+	resp := response.(_newErrorResponse)
 
 	statusCode := 200
 
@@ -174,6 +198,40 @@ func decodeGetTripRequest(ctx context.Context, r *http.Request) (interface{}, er
 	return request, err
 }
 
+func decodeNewErrorRequest(ctx context.Context, r *http.Request) (interface{}, error) {
+
+	var err error
+
+	request := _newErrorRequest{}
+
+	// Extract ID from path which is a string
+	{
+		val := mux.Vars(r)["id"]
+		request.ID = val
+
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	// Extract Pkt from body which is a Packet
+	{
+
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	consumes := []mime.Type{"application/json", "application/octet-stream"}
+
+	dec, err := decoders.RequestDecoder(r, consumes)
+	if err != nil {
+		return nil, err
+	}
+	err = dec.Decode(&request.Pkt)
+	return request, err
+}
+
 func decodeRunRequest(ctx context.Context, r *http.Request) (interface{}, error) {
 
 	var err error
@@ -241,6 +299,23 @@ func NewDebugHTTPServer(svc Debug, opts ...options.Option) http.Handler {
 			svcOptions.HTTPOptions()...,
 		)
 		r.Handle("/trips/{id}", getTripHandler).Methods("GET")
+	}
+
+	{
+		svcOptions.RegisterMiddleware("NewError",
+			encoders.AcceptsMustMatch([]mime.Type{
+				"application/json", "application/x-www-form-urlencoded",
+			}),
+		)
+
+		newErrorEndpoint := makeNewErrorEndpoint(svc, svcOptions)
+		newErrorHandler := httptransport.NewServer(
+			newErrorEndpoint,
+			decodeNewErrorRequest,
+			encodeNewErrorResponse,
+			svcOptions.HTTPOptions()...,
+		)
+		r.Handle("/api/{id}/store", newErrorHandler).Methods("POST")
 	}
 
 	{

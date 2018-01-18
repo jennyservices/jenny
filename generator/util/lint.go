@@ -9,7 +9,13 @@ import (
 )
 
 func NormalizeName(s string) string {
-	return LintName(inflect.Camelize(s))
+	n := ""
+	for _, c := range s {
+		if c != '.' {
+			n += string(c)
+		}
+	}
+	return LintName(inflect.Camelize(n))
 }
 
 // LintName returns a different name if it should be different.

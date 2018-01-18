@@ -94,6 +94,35 @@ paths:
         200:
           schema:
             $ref: '#/definitions/Run'
+  /api/{id}/store/:
+    post:
+      tags:
+        - debug
+      summary: The logs of the last run
+      description: |
+        The logs of the last run
+      operationId: NewError
+      parameters:
+        - name: id
+          in: path
+          description: name of the service to return
+          required: true
+          type: string
+        - name: pkt
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Packet'
+      consumes:
+        - application/json
+        - application/octet-stream
+      produces:
+        - application/json
+        - application/x-www-form-urlencoded
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/ErrorResponse'
 definitions:
   Service:
     properties:
@@ -198,3 +227,88 @@ definitions:
         type: string
       pid:
         type: number
+  Packet:
+    properties:
+      message:
+        type: string
+      event_id:
+        type: string
+      project:
+        type: string
+      level:
+        type: string
+      logger:
+        type: string
+      platform:
+        type: string
+      server_name:
+        type: string
+      exception:
+        $ref: '#/definitions/Exception'
+      extra:
+        $ref: '#/definitions/ExtraInfo'
+    required:
+      - message
+      - event_id
+      - project
+      - level
+      - logger
+      - platform
+      - server_name
+  ExtraInfo:
+    properties:
+      runtime.GOMAXPROCS:
+        type: number
+      runtime.NumCPU:
+        type: number
+      runtime.NumGoroutine:
+        type: number
+      runtime.Version:
+        type: string
+      x-request-id:
+        type: string
+  Exception:
+    properties:
+      value:
+        type: string
+      type:
+        type: string
+      stacktrace:
+        $ref: '#/definitions/StackTrace'
+    required: [value,type]
+  StackTrace:
+    properties:
+      frames:
+        type: array
+        items:
+          $ref: '#/definitions/Frame'
+  Frame:
+    properties:
+      filename:
+        type: string
+      function:
+        type: string
+      module:
+        type: string
+      lineno:
+        type: number
+      abs_path:
+        type: string
+      context_line:
+        type: string
+      pre_context:
+        type: array
+        items:
+          type: string
+      post_context:
+        type: array
+        items:
+          type: string
+      in_app:
+        type: boolean
+    required: [filename, function, module, lineno, abs_path, context_line, in_app]
+  ErrorResponse:
+    properties:
+      wrote:
+        type: boolean
+    required: [wrote]

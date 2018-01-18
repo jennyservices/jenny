@@ -20,6 +20,9 @@ type Debug interface {
 	// GetTrip get a specific request and response
 	GetTrip(ctx context.Context, ID string) (Body *Trip, err error)
 
+	// NewError The logs of the last run
+	NewError(ctx context.Context, ID string, Pkt Packet) (Body *ErrorResponse, err error)
+
 	// Run The logs of the last run
 	Run(ctx context.Context) (Body *Run, err error)
 
@@ -30,56 +33,108 @@ type Debug interface {
 	Trips(ctx context.Context) (Body []Trip, err error)
 }
 
+// ErrorResponse is generated from a swagger definition
+type ErrorResponse struct {
+	Wrote bool `json:"wrote"` // Wrote is generated from a swagger definition
+}
+
+// Exception is generated from a swagger definition
+type Exception struct {
+	Stacktrace *StackTrace `json:"stacktrace,omitempty"` // Stacktrace is generated from a swagger definition
+	Type       string      `json:"type"`                 // Type is generated from a swagger definition
+	Value      string      `json:"value"`                // Value is generated from a swagger definition
+}
+
+// ExtraInfo is generated from a swagger definition
+type ExtraInfo struct {
+	RuntimeGOMAXPROCS   *int    `json:"runtime.GOMAXPROCS,omitempty"`   // RuntimeGOMAXPROCS is generated from a swagger definition
+	RuntimeNumCPU       *int    `json:"runtime.NumCPU,omitempty"`       // RuntimeNumCPU is generated from a swagger definition
+	RuntimeNumGoroutine *int    `json:"runtime.NumGoroutine,omitempty"` // RuntimeNumGoroutine is generated from a swagger definition
+	RuntimeVersion      *string `json:"runtime.Version,omitempty"`      // RuntimeVersion is generated from a swagger definition
+	XRequestID          *string `json:"x-request-id,omitempty"`         // XRequestID is generated from a swagger definition
+}
+
+// Frame is generated from a swagger definition
+type Frame struct {
+	AbsPath     string   `json:"abs_path"`               // AbsPath is generated from a swagger definition
+	ContextLine string   `json:"context_line"`           // ContextLine is generated from a swagger definition
+	Filename    string   `json:"filename"`               // Filename is generated from a swagger definition
+	Function    string   `json:"function"`               // Function is generated from a swagger definition
+	InApp       bool     `json:"in_app"`                 // InApp is generated from a swagger definition
+	Lineno      int      `json:"lineno"`                 // Lineno is generated from a swagger definition
+	Module      string   `json:"module"`                 // Module is generated from a swagger definition
+	PostContext []string `json:"post_context,omitempty"` // PostContext is generated from a swagger definition
+	PreContext  []string `json:"pre_context,omitempty"`  // PreContext is generated from a swagger definition
+}
+
 // Header is generated from a swagger definition
 type Header struct {
-	Key    string   `json:"key"`              // key is generated from a swagger definition
-	Values []string `json:"values,omitempty"` // values is generated from a swagger definition
+	Key    string   `json:"key"`              // Key is generated from a swagger definition
+	Values []string `json:"values,omitempty"` // Values is generated from a swagger definition
+}
+
+// Packet is generated from a swagger definition
+type Packet struct {
+	EventID    string     `json:"event_id"`            // EventID is generated from a swagger definition
+	Exception  *Exception `json:"exception,omitempty"` // Exception is generated from a swagger definition
+	Extra      *ExtraInfo `json:"extra,omitempty"`     // Extra is generated from a swagger definition
+	Level      string     `json:"level"`               // Level is generated from a swagger definition
+	Logger     string     `json:"logger"`              // Logger is generated from a swagger definition
+	Message    string     `json:"message"`             // Message is generated from a swagger definition
+	Platform   string     `json:"platform"`            // Platform is generated from a swagger definition
+	Project    string     `json:"project"`             // Project is generated from a swagger definition
+	ServerName string     `json:"server_name"`         // ServerName is generated from a swagger definition
 }
 
 // Request is generated from a swagger definition
 type Request struct {
-	Body    []byte   `json:"body,omitempty"` // body is generated from a swagger definition
-	Headers []Header `json:"headers"`        // headers is generated from a swagger definition
-	Method  string   `json:"method"`         // method is generated from a swagger definition
-	URL     string   `json:"url"`            // url is generated from a swagger definition
+	Body    []byte   `json:"body,omitempty"` // Body is generated from a swagger definition
+	Headers []Header `json:"headers"`        // Headers is generated from a swagger definition
+	Method  string   `json:"method"`         // Method is generated from a swagger definition
+	URL     string   `json:"url"`            // URL is generated from a swagger definition
 }
 
 // Response is generated from a swagger definition
 type Response struct {
-	Body    []byte   `json:"body,omitempty"` // body is generated from a swagger definition
-	Headers []Header `json:"headers"`        // headers is generated from a swagger definition
-	Status  int      `json:"status"`         // status is generated from a swagger definition
+	Body    []byte   `json:"body,omitempty"` // Body is generated from a swagger definition
+	Headers []Header `json:"headers"`        // Headers is generated from a swagger definition
+	Status  int      `json:"status"`         // Status is generated from a swagger definition
 }
 
 // Run is generated from a swagger definition
 type Run struct {
-	Addr    *string `json:"addr,omitempty"`    // addr is generated from a swagger definition
-	Builder []byte  `json:"builder,omitempty"` // builder is generated from a swagger definition
-	Pid     *int    `json:"pid,omitempty"`     // pid is generated from a swagger definition
-	Runner  []byte  `json:"runner,omitempty"`  // runner is generated from a swagger definition
+	Addr    *string `json:"addr,omitempty"`    // Addr is generated from a swagger definition
+	Builder []byte  `json:"builder,omitempty"` // Builder is generated from a swagger definition
+	Pid     *int    `json:"pid,omitempty"`     // Pid is generated from a swagger definition
+	Runner  []byte  `json:"runner,omitempty"`  // Runner is generated from a swagger definition
 }
 
 // Service is generated from a swagger definition
 type Service struct {
-	Docker            bool    `json:"docker"`                       // docker is generated from a swagger definition
-	Healthy           bool    `json:"healthy"`                      // healthy is generated from a swagger definition
-	Name              string  `json:"name"`                         // name is generated from a swagger definition
-	Ready             bool    `json:"ready"`                        // ready is generated from a swagger definition
-	Swagger           bool    `json:"swagger"`                      // swagger is generated from a swagger definition
-	SwaggerDefinition *string `json:"swagger_definition,omitempty"` // swagger_definition is generated from a swagger definition
+	Docker            bool    `json:"docker"`                       // Docker is generated from a swagger definition
+	Healthy           bool    `json:"healthy"`                      // Healthy is generated from a swagger definition
+	Name              string  `json:"name"`                         // Name is generated from a swagger definition
+	Ready             bool    `json:"ready"`                        // Ready is generated from a swagger definition
+	Swagger           bool    `json:"swagger"`                      // Swagger is generated from a swagger definition
+	SwaggerDefinition *string `json:"swagger_definition,omitempty"` // SwaggerDefinition is generated from a swagger definition
+}
+
+// StackTrace is generated from a swagger definition
+type StackTrace struct {
+	Frames []Frame `json:"frames,omitempty"` // Frames is generated from a swagger definition
 }
 
 // Trip is generated from a swagger definition
 type Trip struct {
-	Duration    int       `json:"duration"`           // duration is generated from a swagger definition
-	ID          string    `json:"id"`                 // id is generated from a swagger definition
-	Method      string    `json:"method"`             // method is generated from a swagger definition
-	OperationID string    `json:"operationId"`        // operationId is generated from a swagger definition
-	Request     *Request  `json:"request,omitempty"`  // request is generated from a swagger definition
-	Response    *Response `json:"response,omitempty"` // response is generated from a swagger definition
-	Status      int       `json:"status"`             // status is generated from a swagger definition
-	Test        []byte    `json:"test"`               // test is generated from a swagger definition
-	URL         string    `json:"url"`                // url is generated from a swagger definition
+	Duration    int       `json:"duration"`           // Duration is generated from a swagger definition
+	ID          string    `json:"id"`                 // ID is generated from a swagger definition
+	Method      string    `json:"method"`             // Method is generated from a swagger definition
+	OperationID string    `json:"operationId"`        // OperationID is generated from a swagger definition
+	Request     *Request  `json:"request,omitempty"`  // Request is generated from a swagger definition
+	Response    *Response `json:"response,omitempty"` // Response is generated from a swagger definition
+	Status      int       `json:"status"`             // Status is generated from a swagger definition
+	Test        []byte    `json:"test"`               // Test is generated from a swagger definition
+	URL         string    `json:"url"`                // URL is generated from a swagger definition
 }
 
 // _getServiceRequest is not to be used outside of this file.
@@ -93,6 +148,14 @@ type _getServiceRequest struct {
 // see https://gokit.io/examples/stringsvc.html#requests-and-responses for more detail
 type _getTripRequest struct {
 	ID string `json:"id"` // name of the service to return
+
+}
+
+// _newErrorRequest is not to be used outside of this file.
+// see https://gokit.io/examples/stringsvc.html#requests-and-responses for more detail
+type _newErrorRequest struct {
+	ID  string `json:"id"`  // name of the service to return
+	Pkt Packet `json:"pkt"` // Pkt is generated from a swagger definition
 
 }
 
@@ -114,35 +177,42 @@ type _tripsRequest struct {
 // _getServiceResponse is not to be used outside of this file.
 // see https://gokit.io/examples/stringsvc.html#requests-and-responses for more detail
 type _getServiceResponse struct {
-	Body []byte `json:"body,omitempty"` // body is generated from a swagger definition
+	Body []byte `json:"body,omitempty"` // Body is generated from a swagger definition
 
 }
 
 // _getTripResponse is not to be used outside of this file.
 // see https://gokit.io/examples/stringsvc.html#requests-and-responses for more detail
 type _getTripResponse struct {
-	Body *Trip `json:"body,omitempty"` // body is generated from a swagger definition
+	Body *Trip `json:"body,omitempty"` // Body is generated from a swagger definition
+
+}
+
+// _newErrorResponse is not to be used outside of this file.
+// see https://gokit.io/examples/stringsvc.html#requests-and-responses for more detail
+type _newErrorResponse struct {
+	Body *ErrorResponse `json:"body,omitempty"` // Body is generated from a swagger definition
 
 }
 
 // _runResponse is not to be used outside of this file.
 // see https://gokit.io/examples/stringsvc.html#requests-and-responses for more detail
 type _runResponse struct {
-	Body *Run `json:"body,omitempty"` // body is generated from a swagger definition
+	Body *Run `json:"body,omitempty"` // Body is generated from a swagger definition
 
 }
 
 // _servicesResponse is not to be used outside of this file.
 // see https://gokit.io/examples/stringsvc.html#requests-and-responses for more detail
 type _servicesResponse struct {
-	Body []Service `json:"body,omitempty"` // body is generated from a swagger definition
+	Body []Service `json:"body,omitempty"` // Body is generated from a swagger definition
 
 }
 
 // _tripsResponse is not to be used outside of this file.
 // see https://gokit.io/examples/stringsvc.html#requests-and-responses for more detail
 type _tripsResponse struct {
-	Body []Trip `json:"body,omitempty"` // body is generated from a swagger definition
+	Body []Trip `json:"body,omitempty"` // Body is generated from a swagger definition
 
 }
 
@@ -182,6 +252,25 @@ func makeGetTripEndpoint(svc Debug, opts *options.Options) endpoint.Endpoint {
 	getTripMiddleware := opts.OpMiddlewares("GetTrip")
 
 	return getTripMiddleware(getTripEndpoint)
+}
+
+// endpoints as used in https://gokit.io/examples/stringsvc.html#endpoints
+func makeNewErrorEndpoint(svc Debug, opts *options.Options) endpoint.Endpoint {
+	newErrorEndpoint := func(ctx context.Context, request interface{}) (interface{}, error) {
+
+		req := request.(_newErrorRequest)
+
+		resp := _newErrorResponse{}
+		var err error
+
+		resp.Body, err = svc.NewError(ctx, req.ID, req.Pkt)
+
+		return resp, err
+	}
+
+	newErrorMiddleware := opts.OpMiddlewares("NewError")
+
+	return newErrorMiddleware(newErrorEndpoint)
 }
 
 // endpoints as used in https://gokit.io/examples/stringsvc.html#endpoints

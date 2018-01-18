@@ -80,38 +80,36 @@ func Aggregate(list []Type) Types {
 	return g
 }
 
-// Intersect takes two mime.Types and returns the intersection of two Types'
-// 'A' and 'B' and writes each element thats present in both Typess to a new
-// Types. In the result grpah, weights of the node are derived from Types 'B'
-/*
-	text/html, text/plain;q=0.9          text/troff, text/html;q=0.9
-	+-TypesA--------------------+        +-TypesB--------------------+
-	|            text           |        |              text         |
-	|              +            |        |               +           |
-	|              |            |        |               |           |
-	| plain <------+----> html  |        | html <--------+---> troff |
-	|   +                   +   |        |  +                   +    |
-	|   |                   |   |        |  |                   |    |
-	|   |                   |   |        |  |                   |    |
-	|   v                   v   |        |  v                   v    |
-	| 0.9                   1.0 |        | 0.9                  1.0  |
-	+---------------------------+        +---------------------------+
-
-	+-result----------------+
-	|       text            |
-	|        +              |
-	|        |              |
-	|        v              |
-	|       html            |
-	|        +              |
-	|        |              |
-	|        v              |
-	|       0.9             |
-	+-----------------------+
-*/
-
 const wildcard = "*"
 
+// Intersect takes two mime.Types and returns the intersection of two Types'
+//  'A' and 'B' and writes each element thats present in both Typess to a new
+//  Types. In the result grpah, weights of the node are derived from Types 'B'
+//
+//   text/html, text/plain;q=0.9          text/troff, text/html;q=0.9
+//	+-TypesA--------------------+        +-TypesB--------------------+
+//	|            text           |        |              text         |
+//	|              +            |        |               +           |
+//	|              |            |        |               |           |
+//	| plain <------+----> html  |        | html <--------+---> troff |
+//	|   +                   +   |        |  +                   +    |
+//	|   |                   |   |        |  |                   |    |
+//	|   |                   |   |        |  |                   |    |
+//	|   v                   v   |        |  v                   v    |
+//	| 0.9                   1.0 |        | 0.9                  1.0  |
+//	+---------------------------+        +---------------------------+
+//
+//	+-result----------------+
+//	|       text            |
+//	|        +              |
+//	|        |              |
+//	|        v              |
+//	|       html            |
+//  |        +              |
+//	|        |              |
+//	|        v              |
+//	|       0.9             |
+//	+-----------------------+
 func Intersect(a Types, b Types) Types {
 	g := make(Types)
 
@@ -129,7 +127,6 @@ func Intersect(a Types, b Types) Types {
 			})
 		}
 	}
-
 	for group, subgroups := range a {
 		if b[group] == nil {
 			continue
@@ -141,6 +138,7 @@ func Intersect(a Types, b Types) Types {
 					g[group] = make(map[string]float64)
 				}
 				g[group][subgroup] = q
+
 			}
 		}
 	}

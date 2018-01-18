@@ -4,9 +4,51 @@ import matchstick from 'matchstick';
 import fetch from 'cross-fetch';
 import url from 'url';
 
+type ErrorResponse = {
+  wrote?: boolean
+};
+
+type Exception = {
+  stacktrace: StackTrace,
+  type?: string,
+  value?: string
+};
+
+type ExtraInfo = {
+  runtimeGOMAXPROCS: number,
+  runtimeNumCPU: number,
+  runtimeNumGoroutine: number,
+  runtimeVersion: string,
+  x_request_id: string
+};
+
+type Frame = {
+  abs_path?: string,
+  context_line?: string,
+  filename?: string,
+  function?: string,
+  in_app?: boolean,
+  lineno?: number,
+  module?: string,
+  post_context: string[],
+  pre_context: string[]
+};
+
 type Header = {
   key?: string,
   values: string[]
+};
+
+type Packet = {
+  event_id?: string,
+  exception: Exception,
+  extra: ExtraInfo,
+  level?: string,
+  logger?: string,
+  message?: string,
+  platform?: string,
+  project?: string,
+  server_name?: string
 };
 
 type Request = {
@@ -36,6 +78,10 @@ type Service = {
   ready?: boolean,
   swagger?: boolean,
   swagger_definition: string
+};
+
+type StackTrace = {
+  frames: Frame[]
 };
 
 type Trip = {
@@ -69,6 +115,14 @@ export default class DebugClient {
     let path = pathMaker.stick({ id: ID });
     let u = url.parse(path);
     let data: Trip = await fetch(path);
+    return data;
+  }
+
+  async NewError(ID: string, Pkt: Packet): Promise<ErrorResponse> {
+    let pathMaker = matchstick(this.baseURL + `/api/{id}/store`, 'template');
+    let path = pathMaker.stick({ id: ID, pkt: Pkt });
+    let u = url.parse(path);
+    let data: ErrorResponse = await fetch(path);
     return data;
   }
 

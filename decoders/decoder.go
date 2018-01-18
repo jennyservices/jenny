@@ -59,13 +59,6 @@ type formDecoder struct {
 	r *http.Request
 }
 
-// TokenRequest as defined in swagger
-type TokenRequest struct {
-	ClientID  string `json:"client_id" schema:"client_id"`
-	Code      string `json:"code" schema:"code"`
-	GrantType string `json:"grant_type" schema:"grant_type"`
-}
-
 func (f *formDecoder) Decode(i interface{}) error {
 	dec := schema.NewDecoder()
 	body, err := ioutil.ReadAll(f.r.Body)
@@ -88,6 +81,10 @@ func RequestDecoder(r *http.Request, accepts []mime.Type) (Decoder, error) {
 	serverAccepts := mime.Aggregate(accepts)
 	clientSent := mime.NewTypes(r.Header.Get("Content-Type"))
 	available := mime.Intersect(serverAccepts, clientSent)
+
+	if len(available) < 0 {
+		available = serverAccepts
+	}
 	var dec Decoder
 	err := available.Walk(func(x mime.Type) error {
 		if decoderFunc, ok := decoders[x]; ok {
@@ -95,7 +92,6 @@ func RequestDecoder(r *http.Request, accepts []mime.Type) (Decoder, error) {
 			return nil
 		}
 		return fmt.Errorf("%s isn't a registered decoder", x)
-
 	})
 	if err != nil {
 		return nil, err
@@ -103,5 +99,6 @@ func RequestDecoder(r *http.Request, accepts []mime.Type) (Decoder, error) {
 	if dec == nil {
 		return nil, errors.New("coudln't find decoder")
 	}
+	log.Printf("%T", dec)
 	return dec, nil
 }

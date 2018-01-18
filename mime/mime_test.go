@@ -20,6 +20,15 @@ func TestParse(t *testing.T) {
 			},
 		},
 		{
+			name:   "single-os",
+			header: "application/octet-stream",
+			Types: map[string]map[string]float64{
+				"application": {
+					"octet-stream": 1.,
+				},
+			},
+		},
+		{
 			name:   "complicated",
 			header: "text/html, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8",
 			Types: map[string]map[string]float64{
@@ -55,7 +64,13 @@ func TestIntersect(t *testing.T) {
 		a, b  string
 	}{
 		{
-			name: "single",
+			name:  "single-single",
+			a:     "application/octet-strean",
+			b:     "application/octet-strean",
+			Types: map[string]map[string]float64{"application": {"octet-stream": 0}},
+		},
+		{
+			name: "single-multi",
 			a:    "text/html",
 			b:    "text/html, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8",
 			Types: map[string]map[string]float64{
@@ -65,7 +80,7 @@ func TestIntersect(t *testing.T) {
 			},
 		},
 		{
-			name: "double",
+			name: "multi-multi",
 			a:    "text/html, application/xml",
 			b:    "text/html, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8",
 			Types: map[string]map[string]float64{
@@ -90,6 +105,7 @@ func TestIntersect(t *testing.T) {
 			for group, subgroups := range test.Types {
 				for subgroup, weight := range subgroups {
 					if g[group][subgroup] != weight {
+						t.Logf("was expecting %v got %v instead", weight, g[group][subgroup])
 						t.Fail()
 					}
 				}

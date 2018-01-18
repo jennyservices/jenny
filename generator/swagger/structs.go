@@ -60,9 +60,9 @@ func (s *swaggerDecoder) describe(x *ir.Schema, schema *spec.Schema) *errors.Gro
 
 func (s *swaggerDecoder) swaggerToIR(name, parent string, schema *spec.Schema) (*ir.Schema, *errors.Group) {
 	x := &ir.Schema{
-		Name:           name,
+		Name:           util.NormalizeName(name),
 		CannonicalName: name,
-		ID:             newID(parent, name),
+		ID:             newID(parent, util.NormalizeName(name)),
 	}
 
 	g := errors.NewGroup("swagger to ir")
@@ -81,9 +81,9 @@ func (s *swaggerDecoder) swaggerToIR(name, parent string, schema *spec.Schema) (
 		x.Properties[prop.Name] = *prop
 	}
 	for _, required := range schema.Required {
-		if prop, ok := x.Properties[required]; ok {
+		if prop, ok := x.Properties[util.NormalizeName(required)]; ok {
 			prop.Required = true
-			x.Properties[required] = prop
+			x.Properties[util.NormalizeName(required)] = prop
 		}
 	}
 	if g.Errored() {
