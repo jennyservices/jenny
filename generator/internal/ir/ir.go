@@ -6,8 +6,10 @@ package ir
 
 // Type is the
 type Type struct {
-	Type   string  `json:"type"`
-	Format *string `json:"format,omitempty"`
+	Type     string  `json:"type"`
+	Format   *string `json:"format,omitempty"`
+	PointsTo *Type   `json:"ptr_to"`
+	ArrayOf  *Type   `json:"arry_of"`
 }
 
 // Schema is the Intermediary representation of a Schema

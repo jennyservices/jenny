@@ -27,7 +27,7 @@ func ErrorReporter(reporter Reporter, op string) endpoint.Middleware {
 		return func(ctx context.Context, request interface{}) (interface{}, error) {
 			var err error
 			var i interface{}
-			defer reporter.Report(err, op)
+			defer reporter.Report(ctx, err, op)
 			i, err = next(ctx, request)
 			return i, err
 		}
@@ -61,14 +61,14 @@ func DefaultErrorEncoder(ctx context.Context, err error, w http.ResponseWriter) 
 // Reporter is an interface used to report errors to an error reporting service
 // like sentry or rollbar
 type Reporter interface {
-	Report(error, string)
+	Report(context.Context, error, string)
 }
 
 // NoopReporter is the default reporter, it does nothing
 type NoopReporter struct{}
 
 // Report does nothing
-func (NoopReporter) Report(error, string) {}
+func (NoopReporter) Report(context.Context, error, string) {}
 
 // HTTPError error is an interface to signal jenny whether a error should be
 // displayed as is to the public or be obfuscated

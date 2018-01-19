@@ -47,11 +47,7 @@ type Exception struct {
 
 // ExtraInfo is generated from a swagger definition
 type ExtraInfo struct {
-	RuntimeGOMAXPROCS   *int    `json:"runtime.GOMAXPROCS,omitempty"`   // RuntimeGOMAXPROCS is generated from a swagger definition
-	RuntimeNumCPU       *int    `json:"runtime.NumCPU,omitempty"`       // RuntimeNumCPU is generated from a swagger definition
-	RuntimeNumGoroutine *int    `json:"runtime.NumGoroutine,omitempty"` // RuntimeNumGoroutine is generated from a swagger definition
-	RuntimeVersion      *string `json:"runtime.Version,omitempty"`      // RuntimeVersion is generated from a swagger definition
-	XRequestID          *string `json:"x-request-id,omitempty"`         // XRequestID is generated from a swagger definition
+	XRequestID *string `json:"x_request_id,omitempty"` // XRequestID is generated from a swagger definition
 }
 
 // Frame is generated from a swagger definition
@@ -84,6 +80,7 @@ type Packet struct {
 	Platform   string     `json:"platform"`            // Platform is generated from a swagger definition
 	Project    string     `json:"project"`             // Project is generated from a swagger definition
 	ServerName string     `json:"server_name"`         // ServerName is generated from a swagger definition
+	Tags       []string   `json:"tags,omitempty"`      // Tags is generated from a swagger definition
 }
 
 // Request is generated from a swagger definition
@@ -127,6 +124,7 @@ type StackTrace struct {
 // Trip is generated from a swagger definition
 type Trip struct {
 	Duration    int       `json:"duration"`           // Duration is generated from a swagger definition
+	Errors      []Packet  `json:"errors,omitempty"`   // Errors is generated from a swagger definition
 	ID          string    `json:"id"`                 // ID is generated from a swagger definition
 	Method      string    `json:"method"`             // Method is generated from a swagger definition
 	OperationID string    `json:"operationId"`        // OperationID is generated from a swagger definition

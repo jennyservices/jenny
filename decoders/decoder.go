@@ -99,6 +99,5 @@ func RequestDecoder(r *http.Request, accepts []mime.Type) (Decoder, error) {
 	if dec == nil {
 		return nil, errors.New("coudln't find decoder")
 	}
-	log.Printf("%T", dec)
 	return dec, nil
 }

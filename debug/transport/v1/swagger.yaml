@@ -203,6 +203,10 @@ definitions:
         type: string
       url:
         type: string
+      errors:
+        type: array
+        items:
+          $ref: '#/definitions/Packet'
       request:
         "$ref": "#/definitions/Request"
       response:
@@ -243,6 +247,8 @@ definitions:
         type: string
       server_name:
         type: string
+      tags:
+        type: "[][]string"
       exception:
         $ref: '#/definitions/Exception'
       extra:
@@ -257,15 +263,7 @@ definitions:
       - server_name
   ExtraInfo:
     properties:
-      runtime.GOMAXPROCS:
-        type: number
-      runtime.NumCPU:
-        type: number
-      runtime.NumGoroutine:
-        type: number
-      runtime.Version:
-        type: string
-      x-request-id:
+      x_request_id:
         type: string
   Exception:
     properties:

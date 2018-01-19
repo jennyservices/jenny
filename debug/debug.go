@@ -44,19 +44,43 @@ func (ds *debugService) Trips(ctx context.Context) ([]v1.Trip, error) {
 	return trps, nil
 }
 
+func (ds *debugService) fetchErrors(id string, trip *v1.Trip) error {
+	return ds.db.View(func(tx *bolt.Tx) error {
+		// Assume bucket exists and has keys
+		b := tx.Bucket([]byte(errbktname))
+		if b == nil {
+			return errors.New("can't find the bucket")
+		}
+		c := b.Cursor()
+		prefix := []byte(id)
+		for k, v := c.Seek(prefix); k != nil && bytes.HasPrefix(k, prefix); k, v = c.Next() {
+			buf := bytes.NewBuffer(v)
+			dec := gob.NewDecoder(buf)
+
+			pkt := v1.Packet{}
+			if err := dec.Decode(&pkt); err != nil {
+				return err
+			}
+			trip.Errors = append(trip.Errors, pkt)
+
+		}
+
+		return nil
+	})
+}
+
 func (ds *debugService) GetTrip(ctx context.Context, id string) (*v1.Trip, error) {
 	t := new(v1.Trip)
-	err := ds.db.View(func(tx *bolt.Tx) error {
+	return t, ds.db.View(func(tx *bolt.Tx) error {
 		// Assume bucket exists and has keys
 		b := tx.Bucket(bucketName)
 		buf := bytes.NewBuffer(b.Get([]byte(id)))
 		dec := gob.NewDecoder(buf)
 		dec.Decode(t)
 		createTest(t)
+		ds.fetchErrors(id, t)
 		return nil
 	})
-
-	return t, err
 }
 
 func urlToString(u *url.URL) *string {

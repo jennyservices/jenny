@@ -8,5 +8,5 @@ type {{ .Name}} = {
 {{ end }}
 
 
-{{- define "field" }}  {{ .CannonicalName }}{{if .Required}}?{{end}}: {{ getType . }},
+{{- define "field" }}  {{ .Name }}{{if .Required}}?{{end}}: {{ getType . }},
 {{ end }}

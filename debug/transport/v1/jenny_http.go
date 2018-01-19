@@ -315,7 +315,7 @@ func NewDebugHTTPServer(svc Debug, opts ...options.Option) http.Handler {
 			encodeNewErrorResponse,
 			svcOptions.HTTPOptions()...,
 		)
-		r.Handle("/api/{id}/store", newErrorHandler).Methods("POST")
+		r.Handle("/api/{id}/store/", newErrorHandler).Methods("POST")
 	}
 
 	{
