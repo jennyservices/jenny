@@ -9,6 +9,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -23,15 +24,15 @@ var (
 	// enough information to determine a decoder
 	ErrDecoderNotFound = errors.New("decoder could not be found")
 	// JSONDecoder decodes data from a http.Request
-	JSONDecoder = func(r *http.Request) Decoder {
-		return json.NewDecoder(r.Body)
+	JSONDecoder = func(r io.Reader) Decoder {
+		return json.NewDecoder(r)
 	}
 	// XMLDecoder decodes data from a http.Request
-	XMLDecoder = func(r *http.Request) Decoder {
-		return xml.NewDecoder(r.Body)
+	XMLDecoder = func(r io.Reader) Decoder {
+		return xml.NewDecoder(r)
 	}
 	// FormDecoder decodes data from a http.Request
-	FormDecoder = func(r *http.Request) Decoder {
+	FormDecoder = func(r io.Reader) Decoder {
 		return &formDecoder{r: r}
 	}
 	decoders = map[mime.Type]newDecoder{
@@ -53,15 +54,15 @@ type Decoder interface {
 	Decode(v interface{}) error
 }
 
-type newDecoder func(*http.Request) Decoder
+type newDecoder func(io.Reader) Decoder
 
 type formDecoder struct {
-	r *http.Request
+	r io.Reader
 }
 
 func (f *formDecoder) Decode(i interface{}) error {
 	dec := schema.NewDecoder()
-	body, err := ioutil.ReadAll(f.r.Body)
+	body, err := ioutil.ReadAll(f.r)
 	log.Println(string(body))
 	if err != nil {
 		return fmt.Errorf("decoding form: reading body: %v", err)
@@ -76,6 +77,24 @@ func (f *formDecoder) Decode(i interface{}) error {
 	return dec.Decode(i, values)
 }
 
+// ResponseDecoder returns a decoder for a given http.Request
+func ResponseDecoder(r *http.Response) (Decoder, error) {
+	serverSent := mime.NewTypes(r.Header.Get("Content-Type"))
+	var dec Decoder
+	err := serverSent.Walk(func(x mime.Type) error {
+		if decoderFunc, ok := decoders[x]; ok {
+			dec = decoderFunc(r.Body)
+			return nil
+		}
+		return fmt.Errorf("%s isn't a registered decoder", x)
+	})
+	if dec == nil {
+		return nil, err
+	} else {
+		return dec, nil
+	}
+}
+
 // RequestDecoder returns a decoder for a given http.Request
 func RequestDecoder(r *http.Request, accepts []mime.Type) (Decoder, error) {
 	serverAccepts := mime.Aggregate(accepts)
@@ -88,7 +107,7 @@ func RequestDecoder(r *http.Request, accepts []mime.Type) (Decoder, error) {
 	var dec Decoder
 	err := available.Walk(func(x mime.Type) error {
 		if decoderFunc, ok := decoders[x]; ok {
-			dec = decoderFunc(r)
+			dec = decoderFunc(r.Body)
 			return nil
 		}
 		return fmt.Errorf("%s isn't a registered decoder", x)
