@@ -14,6 +14,7 @@ import (
 	pkgErrors "github.com/pkg/errors"
 
 	"github.com/Typeform/jenny/errors"
+	"github.com/Typeform/jenny/http"
 	raven "github.com/getsentry/raven-go"
 )
 
@@ -41,12 +42,12 @@ func New(dsn, release string) (errors.Reporter, error) {
 
 // Report reports an error to sentry
 func (s *sentry) Report(ctx context.Context, err error, op string) {
-	//	id := string(http.ContextRequestID(ctx))
+	id := string(http.ContextRequestID(ctx))
 	cause := pkgErrors.Cause(err)
 	pkt := raven.NewPacket(cause.Error(), raven.NewException(cause, raven.GetOrNewStacktrace(cause, 1, 3, []string{})))
 	extra := map[string]interface{}{
 		"operation":    op,
-		"x_request_id": "01C3E38P9JYDNSKAS9VB5N4W9X",
+		"x_request_id": id,
 		"runtime": map[string]interface{}{
 			"version":       runtime.Version(),
 			"num_cpu":       runtime.NumCPU(),
