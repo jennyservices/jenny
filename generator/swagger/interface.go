@@ -32,12 +32,12 @@ func (s *swaggerDecoder) decodeMethods() *errors.Group {
 
 	for pathName, p := range s.spec.Paths.Paths {
 		methods := map[string]*spec.Operation{
-			"GET":    p.Get,
-			"POST":   p.Post,
-			"DELETE": p.Delete,
-			"PUT":    p.Put,
-			"PATCH":  p.Patch,
-			"HEAD":   p.Head,
+			http.MethodGet: p.Get,
+			"POST":         p.Post,
+			"DELETE":       p.Delete,
+			"PUT":          p.Put,
+			"PATCH":        p.Patch,
+			"HEAD":         p.Head,
 		}
 		for methodName, method := range methods {
 			if method == nil {

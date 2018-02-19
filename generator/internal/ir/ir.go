@@ -43,6 +43,7 @@ type Method struct {
 	ParameterOrder []string            `json:"parameterOrder"`
 	Responses      map[string]Response `json:"responses,omitempty"`
 	Scopes         []string            `json:"scopes,omitempty"`
+	Backend        string              `json:"backend,omitempty"`
 }
 
 // Response is the Intermediary representation of a Service

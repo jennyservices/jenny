@@ -25,6 +25,7 @@ const (
 	Swagger decoder = iota
 	Golang  encoder = iota
 	JS
+	Twirp
 )
 
 // Generator is an object that can be used to create jenny services
@@ -74,6 +75,11 @@ func (g *Generator) Generate() error {
 			encoder:  Golang,
 			template: "servicehttp",
 		},
+		// "http_client": {
+		// 	file:     fmt.Sprintf("%s_http_client.go", g.filePrefix),
+		// 	encoder:  Golang,
+		// 	template: "httpclient",
+		// },
 		"client": {
 			file:     fmt.Sprintf("%s_client.js", g.filePrefix),
 			encoder:  JS,

@@ -4,7 +4,9 @@
 
 package golang
 
-import "testing"
+import (
+	"testing"
+)
 
 // Bug report: https://github.com/Typeform/jenny/issues/20
 // Reported by: @marc-gr
