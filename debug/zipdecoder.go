@@ -5,7 +5,6 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"io"
-	"net/http"
 
 	"github.com/Typeform/jenny/decoders"
 	"github.com/Typeform/jenny/mime"
@@ -15,8 +14,8 @@ func init() {
 	decoders.Register(mime.ApplicationOctet, newZipedJSONDecoder)
 }
 
-func newZipedJSONDecoder(r *http.Request) decoders.Decoder {
-	return &zipedJSONDecoder{r: r.Body}
+func newZipedJSONDecoder(r io.Reader) decoders.Decoder {
+	return &zipedJSONDecoder{r: r}
 }
 
 type zipedJSONDecoder struct {
