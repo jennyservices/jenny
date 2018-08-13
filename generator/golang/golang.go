@@ -21,7 +21,7 @@ import (
 	"github.com/jennyservices/jenny/generator/util"
 	"github.com/go-openapi/inflect"
 	"github.com/pkg/errors"
-	"sevki.org/lib/source"
+	"sevki.org/x/source"
 )
 
 const (

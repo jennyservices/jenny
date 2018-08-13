@@ -8,7 +8,7 @@ import (
 	"github.com/jennyservices/jenny/generator/internal/ir"
 	"github.com/jennyservices/jenny/generator/util"
 	"github.com/go-openapi/spec"
-	"sevki.org/lib/errors"
+	"sevki.org/x/errors"
 )
 
 func deDupe(a []string) (r []string) {

@@ -10,8 +10,8 @@ import (
 
 	"github.com/jennyservices/jenny/generator/internal/ir"
 	"github.com/jennyservices/jenny/generator/util"
-	"sevki.org/lib/errors"
-	"sevki.org/lib/prettyprint"
+	"sevki.org/x/errors"
+	"sevki.org/x/pretty"
 
 	"github.com/go-openapi/spec"
 )
@@ -110,7 +110,7 @@ func (s *swaggerDecoder) guessType(x *ir.Schema, schema *spec.Schema) *errors.Gr
 		}
 		arrayType := s.typer(schema.Items.Schema)
 		if arrayType == nil {
-			return g.Newf("coudln't determine array type for %q\n%s", x.ID, prettyprint.AsJSON(schema))
+			return g.Newf("coudln't determine array type for %q\n%s", x.ID, pretty.JSON(schema))
 		}
 		x.Type = "[]" + arrayType.Type
 	}

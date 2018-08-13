@@ -12,7 +12,7 @@ import (
 	"github.com/jennyservices/jenny/generator/internal/ir"
 	"github.com/d4l3k/messagediff"
 
-	"sevki.org/lib/prettyprint"
+	"sevki.org/x/pretty"
 )
 
 func init() {
@@ -93,7 +93,7 @@ func TestSwagger(t *testing.T) {
 				// Use of this source code is governed by a MIT-style
 				// license that can be found in the LICENSE file.
 
-				io.WriteString(goldFile, prettyprint.AsJSON(svc))
+				io.WriteString(goldFile, pretty.AsJSON(svc))
 
 				goldFile.Close()
 				return

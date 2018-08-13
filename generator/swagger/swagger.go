@@ -21,7 +21,7 @@ import (
 	"github.com/blang/semver"
 	"github.com/go-openapi/loads"
 	"github.com/go-openapi/spec"
-	"sevki.org/lib/errors"
+	"sevki.org/x/errors"
 )
 
 var (
