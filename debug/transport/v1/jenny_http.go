@@ -8,10 +8,10 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/Typeform/jenny/decoders"
-	"github.com/Typeform/jenny/encoders"
-	"github.com/Typeform/jenny/mime"
-	"github.com/Typeform/jenny/options"
+	"github.com/jennyservices/jenny/decoders"
+	"github.com/jennyservices/jenny/encoders"
+	"github.com/jennyservices/jenny/mime"
+	"github.com/jennyservices/jenny/options"
 	httptransport "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"
 )

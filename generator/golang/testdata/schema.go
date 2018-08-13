@@ -10,7 +10,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/Typeform/jenny/options"
+	"github.com/jennyservices/jenny/options"
 	"github.com/gorilla/mux"
 )
 

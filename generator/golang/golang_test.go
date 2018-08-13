@@ -10,7 +10,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/Typeform/jenny/generator/internal/ir"
+	"github.com/jennyservices/jenny/generator/internal/ir"
 	"github.com/sergi/go-diff/diffmatchpatch"
 )
 

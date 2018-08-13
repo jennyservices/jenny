@@ -6,7 +6,7 @@
 package cmd
 
 import (
-	"github.com/Typeform/jenny/debug"
+	"github.com/jennyservices/jenny/debug"
 	"github.com/spf13/cobra"
 )
 

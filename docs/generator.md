@@ -12,7 +12,7 @@ is then consumed by a text template that is specific for a language like `Go` or
 
 ### Why IR?
 
-The [IR](https://godoc.org/github.com/Typeform/jenny/generator/internal/ir/)
+The [IR](https://godoc.org/github.com/jennyservices/jenny/generator/internal/ir/)
 package has two higher level goals;
 
 * Encapsulate multiple different service definitions.
@@ -43,9 +43,9 @@ definitions but the initial set is limited to `Go` and `swagger`.
 
 ### Encoders
 
-* [Go](https://github.com/Typeform/jenny/tree/master/generator/golang)
-* [Javascript](https://github.com/Typeform/jenny/tree/master/generator/js) [WIP]
+* [Go](https://github.com/jennyservices/jenny/tree/master/generator/golang)
+* [Javascript](https://github.com/jennyservices/jenny/tree/master/generator/js) [WIP]
 
 ### Decoders
 
-* [Swagger](https://github.com/Typeform/jenny/tree/master/generator/swagger)
+* [Swagger](https://github.com/jennyservices/jenny/tree/master/generator/swagger)

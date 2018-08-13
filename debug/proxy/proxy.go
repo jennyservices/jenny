@@ -23,7 +23,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/Typeform/jenny/debug/watcher"
+	"github.com/jennyservices/jenny/debug/watcher"
 	"github.com/cenkalti/backoff"
 	"github.com/oklog/ulid"
 	"github.com/pkg/errors"

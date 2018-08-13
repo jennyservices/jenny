@@ -15,7 +15,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/Typeform/jenny/mime"
+	"github.com/jennyservices/jenny/mime"
 	"github.com/gorilla/schema"
 )
 

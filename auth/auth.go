@@ -15,11 +15,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	jennyerrors "github.com/Typeform/jenny/errors"
-	jennyhttp "github.com/Typeform/jenny/http"
 	stdjwt "github.com/dgrijalva/jwt-go"
 	kitjwt "github.com/go-kit/kit/auth/jwt"
 	"github.com/go-kit/kit/endpoint"
+	jennyerrors "github.com/jennyservices/jenny/errors"
+	jennyhttp "github.com/jennyservices/jenny/http"
 )
 
 type contextKey int

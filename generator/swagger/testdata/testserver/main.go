@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	testservice "github.com/Typeform/jenny/testdata"
+	testservice "github.com/jennyservices/jenny/testdata"
 )
 
 type fakeTesterino struct {

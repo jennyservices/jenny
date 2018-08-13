@@ -11,8 +11,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Typeform/jenny/debug/proxy"
-	"github.com/Typeform/jenny/debug/transport/v1"
+	"github.com/jennyservices/jenny/debug/proxy"
+	"github.com/jennyservices/jenny/debug/transport/v1"
 	"github.com/boltdb/bolt"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
@@ -52,7 +52,7 @@ func Start(pkgName string) {
 	p.SetMiddleware(debugServer.debugHandler)
 
 	ds := v1.NewDebugHTTPServer(debugServer).(*mux.Router)
-	jennyUI := filepath.Join(os.Getenv("GOPATH"), "src/github.com/Typeform/jenny/debug/transport/ui/")
+	jennyUI := filepath.Join(os.Getenv("GOPATH"), "src/github.com/jennyservices/jenny/debug/transport/ui/")
 	ds.PathPrefix("/").Handler(http.FileServer(http.Dir(jennyUI)))
 
 	log.Println("starting debug server at http://0.0.0.0:1337")

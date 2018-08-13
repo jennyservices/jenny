@@ -10,10 +10,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Typeform/jenny/generator/golang"
-	"github.com/Typeform/jenny/generator/internal/ir"
-	"github.com/Typeform/jenny/generator/js"
-	"github.com/Typeform/jenny/generator/swagger"
+	"github.com/jennyservices/jenny/generator/golang"
+	"github.com/jennyservices/jenny/generator/internal/ir"
+	"github.com/jennyservices/jenny/generator/js"
+	"github.com/jennyservices/jenny/generator/swagger"
 
 	"github.com/pkg/errors"
 )

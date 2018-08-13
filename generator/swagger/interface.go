@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"path"
 
-	"github.com/Typeform/jenny/generator/internal/ir"
-	"github.com/Typeform/jenny/generator/util"
+	"github.com/jennyservices/jenny/generator/internal/ir"
+	"github.com/jennyservices/jenny/generator/util"
 	"github.com/go-openapi/spec"
 	"sevki.org/lib/errors"
 )

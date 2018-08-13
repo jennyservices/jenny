@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Typeform/jenny/debug/transport/v1"
+	"github.com/jennyservices/jenny/debug/transport/v1"
 	"github.com/boltdb/bolt"
 )
 

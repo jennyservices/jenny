@@ -7,9 +7,9 @@ package jenny
 import (
 	"io"
 
-	"github.com/Typeform/jenny/generator/internal/ir"
+	"github.com/jennyservices/jenny/generator/internal/ir"
 
-	"github.com/Typeform/jenny/generator/swagger"
+	"github.com/jennyservices/jenny/generator/swagger"
 )
 
 type Service ir.Service

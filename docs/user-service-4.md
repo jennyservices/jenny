@@ -22,7 +22,7 @@ import (
 	"strconv"
 	"testing"
 
-	jennyerrors "github.com/Typeform/jenny/errors"
+	jennyerrors "github.com/jennyservices/jenny/errors"
 	"github.com/Typeform/users/datastore/mockdb"
 	"github.com/Typeform/users/transport/v1"
 	"github.com/Typeform/users/user"

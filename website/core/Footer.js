@@ -45,7 +45,7 @@ class Footer extends React.Component {
               target="_blank">
               Mailing List
             </a>
-            <a href="https://github.com/typeform/jenny/issues" target="_blank">
+            <a href="https://github.com/jennyservices/jenny/issues" target="_blank">
               Issues
             </a>
           </div>

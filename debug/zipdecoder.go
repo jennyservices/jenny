@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"io"
 
-	"github.com/Typeform/jenny/decoders"
-	"github.com/Typeform/jenny/mime"
+	"github.com/jennyservices/jenny/decoders"
+	"github.com/jennyservices/jenny/mime"
 )
 
 func init() {

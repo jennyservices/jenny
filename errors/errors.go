@@ -11,8 +11,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Typeform/jenny/encoders"
-	"github.com/Typeform/jenny/mime"
+	"github.com/jennyservices/jenny/encoders"
+	"github.com/jennyservices/jenny/mime"
 	"github.com/go-kit/kit/endpoint"
 	kitthttp "github.com/go-kit/kit/transport/http"
 )

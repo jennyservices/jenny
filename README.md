@@ -1,4 +1,4 @@
-# <img src="https://musing-jepsen-d55010.netlify.com/img/jenny.svg" height="70" />
+# <img src="http://jenny.services/img/jenny.svg" height="70" />
 
 **Jenny** _the Generator_ are the set of tools developed at Typeform for rapid
 development of production ready micro-services.
@@ -6,8 +6,8 @@ development of production ready micro-services.
 ## Documentation
 
 * Mailing List: [jenny-dev](https://groups.google.com/forum/#!forum/jenny-dev)
-* Bug Tracker: [Issues](https://github.com/typeform/jenny/issues)
-* Docs: [Docs](https://github.com/Typeform/jenny/tree/master/docs)
+* Bug Tracker: [Issues](https://github.com/jennyservices/jenny/issues)
+* Docs: [Docs](https://github.com/jennyservices/jenny/tree/master/docs)
 * GoDoc:
   [![GoDoc](https://godoc.org/github.com/Typeform/jenny?status.svg)](https://godoc.org/github.com/Typeform/jenny)
 * Travis-CI:
@@ -26,13 +26,13 @@ development of production ready micro-services.
 ### Install:
 
 ```
-go get github.com/Typeform/jenny/cmd/jenny
+go get github.com/jennyservices/jenny/cmd/jenny
 ```
 
 ## Contributing
 
 See the
-[CONTRIBUTING.md](https://github.com/Typeform/jenny/blob/master/CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/jennyservices/jenny/blob/master/CONTRIBUTING.md)
 for details.
 
 ## Maintainers

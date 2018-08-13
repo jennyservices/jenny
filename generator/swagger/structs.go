@@ -8,8 +8,8 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/Typeform/jenny/generator/internal/ir"
-	"github.com/Typeform/jenny/generator/util"
+	"github.com/jennyservices/jenny/generator/internal/ir"
+	"github.com/jennyservices/jenny/generator/util"
 	"sevki.org/lib/errors"
 	"sevki.org/lib/prettyprint"
 

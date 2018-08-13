@@ -17,8 +17,8 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/Typeform/jenny/generator/internal/ir"
-	"github.com/Typeform/jenny/generator/util"
+	"github.com/jennyservices/jenny/generator/internal/ir"
+	"github.com/jennyservices/jenny/generator/util"
 	"github.com/go-openapi/inflect"
 	"github.com/pkg/errors"
 	"sevki.org/lib/source"
@@ -30,9 +30,9 @@ const (
 )
 
 var (
-	base  = path.Join(build.Default.GOPATH, "src/github.com/Typeform/jenny/templates/go/")
+	base  = path.Join(build.Default.GOPATH, "src/github.com/jennyservices/jenny/templates/go/")
 	tmpl  = template.Must(template.New("").Funcs(funcs).ParseGlob(path.Join(base, "/*.go.tmpl")))
-	pathy = path.Join(build.Default.GOPATH, "src/github.com/Typeform/jenny/templates/go/*.go.tmpl")
+	pathy = path.Join(build.Default.GOPATH, "src/github.com/jennyservices/jenny/templates/go/*.go.tmpl")
 	fset  = token.NewFileSet()
 
 	funcs = map[string]interface{}{

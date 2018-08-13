@@ -11,13 +11,13 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/Typeform/jenny/generator/internal/ir"
-	"github.com/Typeform/jenny/generator/util"
+	"github.com/jennyservices/jenny/generator/internal/ir"
+	"github.com/jennyservices/jenny/generator/util"
 	"github.com/go-openapi/inflect"
 )
 
 var (
-	tmpl  = template.Must(template.New("").Funcs(funcs).ParseGlob(path.Join(build.Default.GOPATH, "src/github.com/Typeform/jenny/templates/js/*.js.tmpl")))
+	tmpl  = template.Must(template.New("").Funcs(funcs).ParseGlob(path.Join(build.Default.GOPATH, "src/github.com/jennyservices/jenny/templates/js/*.js.tmpl")))
 	funcs = map[string]interface{}{
 		"join":              strings.Join,
 		"camelizeDownFirst": camelizeDownFirst,

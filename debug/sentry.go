@@ -8,9 +8,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Typeform/jenny/errors"
+	"github.com/jennyservices/jenny/errors"
 
-	"github.com/Typeform/jenny/debug/transport/v1"
+	"github.com/jennyservices/jenny/debug/transport/v1"
 	"github.com/boltdb/bolt"
 )
 

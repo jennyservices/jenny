@@ -10,7 +10,7 @@ import (
 	"crypto/sha256"
 	"net/http"
 
-	"github.com/Typeform/jenny/spec/transport/v1"
+	"github.com/jennyservices/jenny/spec/transport/v1"
 	swagger "github.com/go-openapi/spec"
 )
 

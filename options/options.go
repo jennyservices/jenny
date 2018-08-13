@@ -5,9 +5,9 @@
 package options
 
 import (
-	"github.com/Typeform/jenny/auth"
-	"github.com/Typeform/jenny/errors"
-	jennyhttp "github.com/Typeform/jenny/http"
+	"github.com/jennyservices/jenny/auth"
+	"github.com/jennyservices/jenny/errors"
+	jennyhttp "github.com/jennyservices/jenny/http"
 	stdjwt "github.com/dgrijalva/jwt-go"
 	"github.com/go-kit/kit/auth/jwt"
 	"github.com/go-kit/kit/endpoint"
@@ -147,7 +147,7 @@ func WithJWTParser(jwtFunc kitthttp.RequestFunc, keyFunc stdjwt.Keyfunc, method 
 }
 
 // WithScopesParser adds a middleware that injects Scopes in the context
-// see https://godoc.org/github.com/Typeform/jenny/auth for docs
+// see https://godoc.org/github.com/jennyservices/jenny/auth for docs
 func WithScopesParser(scopesFunc auth.JWTScopesExtrator) Option {
 	return func(m *Options) {
 		m.scopesFunc = scopesFunc
@@ -155,7 +155,7 @@ func WithScopesParser(scopesFunc auth.JWTScopesExtrator) Option {
 }
 
 // WithUserParser adds a middleware that injects an object that implents the
-// User interface in the context see https://godoc.org/github.com/Typeform/jenny/auth for docs
+// User interface in the context see https://godoc.org/github.com/jennyservices/jenny/auth for docs
 func WithUserParser(userFunc auth.JWTUserExtractor) Option {
 	return func(m *Options) {
 		m.userFunc = userFunc

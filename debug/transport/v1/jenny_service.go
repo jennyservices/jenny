@@ -7,7 +7,7 @@ package v1
 import (
 	"context"
 
-	"github.com/Typeform/jenny/options"
+	"github.com/jennyservices/jenny/options"
 	"github.com/go-kit/kit/endpoint"
 )
 

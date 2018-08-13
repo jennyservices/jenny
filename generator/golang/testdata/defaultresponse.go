@@ -11,9 +11,9 @@ import (
 	"os/user"
 	"strconv"
 
-	"github.com/Typeform/jenny/decoders"
-	"github.com/Typeform/jenny/encoders"
-	"github.com/Typeform/jenny/options"
+	"github.com/jennyservices/jenny/decoders"
+	"github.com/jennyservices/jenny/encoders"
+	"github.com/jennyservices/jenny/options"
 	"github.com/go-kit/kit/endpoint"
 	httptransport "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"

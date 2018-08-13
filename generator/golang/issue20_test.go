@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-// Bug report: https://github.com/Typeform/jenny/issues/20
+// Bug report: https://github.com/jennyservices/jenny/issues/20
 // Reported by: @marc-gr
 // Issue: Now, if a field type is number, but its format is float, jenny ignores
 // the format and set it as int. We should take into account the format when

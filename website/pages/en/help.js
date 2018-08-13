@@ -42,7 +42,7 @@ class Help extends React.Component {
             </header>
             <p>
               Please visit our{' '}
-              <a href="https://github.com/Typeform/jenny/blob/master/CONTRIBUTING.md">
+              <a href="https://github.com/jennyservices/jenny/blob/master/CONTRIBUTING.md">
                 contribution guidelines
               </a>{' '}
               to see how you can start helping.
@@ -51,7 +51,7 @@ class Help extends React.Component {
               Issues
               <ul>
                 <li>
-                  <a href="https://github.com/Typeform/jenny/issues?q=is%3Aissue+is%3Aopen+label%3Abeginner">
+                  <a href="https://github.com/jennyservices/jenny/issues?q=is%3Aissue+is%3Aopen+label%3Abeginner">
                     Beginner issues
                   </a>
                 </li>

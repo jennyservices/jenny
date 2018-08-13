@@ -15,8 +15,8 @@ import (
 	"net/url"
 	"path"
 
-	jennyhttp "github.com/Typeform/jenny/http"
-	"github.com/Typeform/jenny/mime"
+	jennyhttp "github.com/jennyservices/jenny/http"
+	"github.com/jennyservices/jenny/mime"
 	"github.com/go-kit/kit/endpoint"
 	"github.com/golang/gddo/httputil/header"
 	"github.com/gorilla/schema"

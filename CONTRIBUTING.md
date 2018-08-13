@@ -13,7 +13,7 @@ things you're excited about.
 
 Jenny, like most other open source projects, has a Code of Conduct that it
 expects its contributors and core team members to adhere to. Our
-[Code of Conduct](https://github.com/Typeform/jenny/blob/master/CODE_OF_CONDUCT.md)
+[Code of Conduct](https://github.com/jennyservices/jenny/blob/master/CODE_OF_CONDUCT.md)
 is available at the root of this repo. Any violation of the Code of Conduct
 should be reported to
 [Typeform Open-Source](https://open-source.typeform.com/to/xYAH1q) immidiately.
@@ -21,8 +21,8 @@ should be reported to
 Here are some additional resources;
 
 * Mailing List: [jenny-dev](https://groups.google.com/forum/#!forum/jenny-dev)
-* Bug Tracker: [Issues](https://github.com/typeform/jenny/issues)
-* Docs: [Docs](https://github.com/Typeform/jenny/tree/master/docs)
+* Bug Tracker: [Issues](https://github.com/jennyservices/jenny/issues)
+* Docs: [Docs](https://github.com/jennyservices/jenny/tree/master/docs)
 * GoDoc:
   [![GoDoc](https://godoc.org/github.com/Typeform/jenny?status.svg)](https://godoc.org/github.com/Typeform/jenny)
 * Travis-CI:
@@ -41,7 +41,7 @@ decisions behind it.
 
 ### Design Decisions
 
-* [Generator](https://github.com/Typeform/jenny/blob/master/docs/generator.md)
+* [Generator](https://github.com/jennyservices/jenny/blob/master/docs/generator.md)
 
 ## Reporting Bugs
 
@@ -76,9 +76,9 @@ in this early stage we can't accept major enhancements.
 Unsure where to begin contributing to Atom? You can start by looking through
 these `beginner` and `help-wanted` issues:
 
-* [Beginner issues](https://github.com/Typeform/jenny/labels/beginner) - issues
+* [Beginner issues](https://github.com/jennyservices/jenny/labels/beginner) - issues
   which should only require a few lines of code, and a test or two.
-* [Help wanted issues](https://github.com/Typeform/jenny/labels/help%20wanted) -
+* [Help wanted issues](https://github.com/jennyservices/jenny/labels/help%20wanted) -
   issues which should be a bit more involved than beginner issues.
 
 ## Your first Pull Request
@@ -101,7 +101,7 @@ Second thing to do is adding `issue20_test.go`. Here you should add a reference
 to the bug you are fixing. If one does not exist, describe the issue here.
 
 ```golang
-// Bug report: https://github.com/Typeform/jenny/issues/20
+// Bug report: https://github.com/jennyservices/jenny/issues/20
 // Reported by: @marc-gr
 // Issue: Now, if a field type is number, but its format is float, jenny ignores
 // the format and set it as int. We should take into account the format when

@@ -14,8 +14,8 @@ import (
 	"net/url"
 	"sort"
 
-	"github.com/Typeform/jenny/debug/transport/v1"
 	"github.com/boltdb/bolt"
+	"github.com/jennyservices/jenny/debug/transport/v1"
 )
 
 func (ds *debugService) Trips(ctx context.Context) ([]v1.Trip, error) {

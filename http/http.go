@@ -13,7 +13,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Typeform/jenny/mime"
+	"github.com/jennyservices/jenny/mime"
 	"github.com/oklog/ulid"
 )
 

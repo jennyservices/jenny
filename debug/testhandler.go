@@ -11,8 +11,8 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/Typeform/jenny/debug/httptestutil"
-	"github.com/Typeform/jenny/debug/transport/v1"
+	"github.com/jennyservices/jenny/debug/httptestutil"
+	"github.com/jennyservices/jenny/debug/transport/v1"
 	"golang.org/x/tools/imports"
 )
 

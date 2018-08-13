@@ -9,7 +9,7 @@ import (
 	"path"
 	"testing"
 
-	"github.com/Typeform/jenny/generator/internal/ir"
+	"github.com/jennyservices/jenny/generator/internal/ir"
 	"github.com/d4l3k/messagediff"
 
 	"sevki.org/lib/prettyprint"
@@ -42,7 +42,7 @@ func TestSwagger(t *testing.T) {
 		},
 		{
 			name: "debug",
-			file: path.Join(build.Default.GOPATH, "src/github.com/Typeform/jenny/debug/transport/v1/swagger.yaml"),
+			file: path.Join(build.Default.GOPATH, "src/github.com/jennyservices/jenny/debug/transport/v1/swagger.yaml"),
 			err:  nil,
 		},
 		{
@@ -52,12 +52,12 @@ func TestSwagger(t *testing.T) {
 		},
 		{
 			name: "WRONGSPEC",
-			file: path.Join(build.Default.GOPATH, "src/github.com/Typeform/jenny/.travis.yml"),
+			file: path.Join(build.Default.GOPATH, "src/github.com/jennyservices/jenny/.travis.yml"),
 			err:  ErrSpecIncorrect,
 		},
 		{
 			name: "NOTASPEC",
-			file: path.Join(build.Default.GOPATH, "src/github.com/Typeform/jenny/README.md"),
+			file: path.Join(build.Default.GOPATH, "src/github.com/jennyservices/jenny/README.md"),
 			err:  ErrSpecIncorrect,
 		},
 	}

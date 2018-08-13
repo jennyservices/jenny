@@ -11,7 +11,7 @@ To get started you'll need [`Go`](https://golang.org/dl/) and that's pretty much
 it. After you install `Go` go get `jenny` by;
 
 ```bash
-go get github.com/Typeform/jenny/cmd/jenny
+go get github.com/jennyservices/jenny/cmd/jenny
 ```
 
 ## [Tutorials](tutorials.md)

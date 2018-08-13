@@ -4,7 +4,7 @@
 
 package main
 
-import "github.com/Typeform/jenny/cmd/jenny/cmd"
+import "github.com/jennyservices/jenny/cmd/jenny/cmd"
 
 func main() {
 	cmd.Execute()

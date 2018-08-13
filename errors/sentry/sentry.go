@@ -13,8 +13,8 @@ import (
 
 	pkgErrors "github.com/pkg/errors"
 
-	"github.com/Typeform/jenny/errors"
-	"github.com/Typeform/jenny/http"
+	"github.com/jennyservices/jenny/errors"
+	"github.com/jennyservices/jenny/http"
 	raven "github.com/getsentry/raven-go"
 )
 

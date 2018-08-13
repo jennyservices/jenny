@@ -7,7 +7,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/Typeform/jenny/generator"
+	"github.com/jennyservices/jenny/generator"
 	"github.com/spf13/cobra"
 )
 

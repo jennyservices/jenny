@@ -15,7 +15,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/Typeform/jenny/generator/internal/ir"
+	"github.com/jennyservices/jenny/generator/internal/ir"
 	"github.com/go-openapi/inflect"
 
 	"github.com/blang/semver"
