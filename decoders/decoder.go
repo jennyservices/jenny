@@ -15,8 +15,8 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/jennyservices/jenny/mime"
 	"github.com/gorilla/schema"
+	"github.com/jennyservices/jenny/mime"
 )
 
 var (
@@ -116,7 +116,7 @@ func RequestDecoder(r *http.Request, accepts []mime.Type) (Decoder, error) {
 		return nil, err
 	}
 	if dec == nil {
-		return nil, errors.New("coudln't find decoder")
+		return nil, fmt.Errorf("coudln't find decoder for %q", accepts)
 	}
 	return dec, nil
 }

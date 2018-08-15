@@ -9,12 +9,13 @@ func New{{ .Name }}HTTPServer(svc {{ $svc }}, opts ...options.Option) http.Handl
   for _, optf := range opts {
     optf(svcOptions)
   }
+
   {{ range .Resources }}
-  {
+	{
   svcOptions.RegisterMiddleware("{{ .Name }}",
     encoders.AcceptsMustMatch([]mime.Type{ {{template "stringArray" .Produces }} }),
   )
- 
+
 	{{ camelizeDownFirst .Name }}Endpoint := make{{ .Name}}Endpoint(svc, svcOptions)
   {{ camelizeDownFirst .Name }}Handler := httptransport.NewServer(
   {{ camelizeDownFirst .Name }}Endpoint,
@@ -22,10 +23,12 @@ func New{{ .Name }}HTTPServer(svc {{ $svc }}, opts ...options.Option) http.Handl
   encode{{ .Name }}Response,
   			svcOptions.HTTPOptions()...,
   )
-  r.Handle("{{ .Path }}",  {{ camelizeDownFirst .Name }}Handler).Methods("{{ .HTTPMethod }}")
-  }
-  {{ end }}
-  return r
+
+ 
+  r.HandleFunc("{{ .Path }}",  {{ camelizeDownFirst .Name }}Handler).Methods("{{ .HTTPMethod }}")
+	}
+	{{ end }}
+	return r
 }
 
 {{ end }}
