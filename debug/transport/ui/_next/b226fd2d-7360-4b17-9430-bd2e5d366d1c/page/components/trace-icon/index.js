@@ -1,6 +1,0 @@
-
-          window.__NEXT_REGISTER_PAGE('/components/trace-icon', function() {
-            var comp = module.exports=webpackJsonp([33],{1419:function(e,t,l){e.exports=l(1420)},1420:function(e,t,l){"use strict";function u(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0});var a=l(9),n=u(a),f=l(7),d=u(f),r=l(8),i=u(r),o=l(10),c=u(o),s=l(11),p=u(s),h=l(1),m=u(h),v=l(12),_=u(v),E=function(e){function t(){return(0,d.default)(this,t),(0,c.default)(this,(t.__proto__||(0,n.default)(t)).apply(this,arguments))}return(0,p.default)(t,e),(0,i.default)(t,[{key:"render",value:function(){return m.default.createElement(_.default,null,m.default.createElement("svg",{id:"TRACES_SECTION",fill:"none","fill-rule":"evenodd",xmlns:"http://www.w3.org/2000/svg",fit:"",preserveAspectRatio:"xMidYMid meet",focusable:"false"},m.default.createElement("path",{d:"M16 19h14v-6H16z",fill:"#616161"}),m.default.createElement("path",{d:"M2 19h14v-6H2z",fill:"#757575"}),m.default.createElement("path",{d:"M16 30h14v-6H16z",fill:"#616161"}),m.default.createElement("path",{d:"M2 8h9V2H2zm9 22h5v-6h-5z",fill:"#757575"})))}}]),t}(m.default.Component);t.default=E}},[1419]);
-            return { page: comp.default }
-          })
-        

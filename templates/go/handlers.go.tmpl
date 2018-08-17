@@ -24,8 +24,8 @@ func New{{ .Name }}HTTPServer(svc {{ $svc }}, opts ...options.Option) http.Handl
   			svcOptions.HTTPOptions()...,
   )
 
- 
-  r.HandleFunc("{{ .Path }}",  {{ camelizeDownFirst .Name }}Handler).Methods("{{ .HTTPMethod }}")
+
+  r.Handle("{{ .Path }}",  {{ camelizeDownFirst .Name }}Handler).Methods("{{ .HTTPMethod }}")
 	}
 	{{ end }}
 	return r
