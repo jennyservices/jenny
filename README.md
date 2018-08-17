@@ -9,11 +9,11 @@ development of production ready micro-services.
 * Bug Tracker: [Issues](https://github.com/jennyservices/jenny/issues)
 * Docs: [Docs](https://github.com/jennyservices/jenny/tree/master/docs)
 * GoDoc:
-  [![GoDoc](https://godoc.org/github.com/jennyservices/jenny?status.svg)](https://godoc.org/github.com/Typeform/jenny)
+  [![GoDoc](https://godoc.org/github.com/jennyservices/jenny?status.svg)](https://godoc.org/github.com/jennyservices/jenny)
 * Travis-CI:
-  [![Build Status](https://travis-ci.org/jennyservices/jenny.svg?branch=master)](https://travis-ci.org/Typeform/jenny)
+  [![Build Status](https://travis-ci.org/jennyservices/jenny.svg?branch=master)](https://travis-ci.org/jennyservices/jenny)
 * Coverage:
-  [![codecov](https://codecov.io/gh/Typeform/jenny/branch/master/graph/badge.svg)](https://codecov.io/gh/Typeform/jenny)
+  [![codecov](https://codecov.io/gh/jennyservices/jenny/branch/master/graph/badge.svg)](https://codecov.io/gh/jennyservices/jenny)
 
 ## Getting started
 
