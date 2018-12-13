@@ -124,7 +124,7 @@ func JWTToContext(keyFunc stdjwt.Keyfunc, method stdjwt.SigningMethod, newClaims
 			// flexibility.
 			token, err := stdjwt.ParseWithClaims(tokenString, newClaims(), keyFunc)
 			if err != nil {
-				log.Print(err.Error())
+				log.Println(errors.Wrap(err, "jwttoctx"))
 			}
 			if !token.Valid {
 				return next(ctx, request)
