@@ -3,7 +3,6 @@ package authtest // github.com/jennyservices/jenny/auth/authtest
 import (
 	"context"
 
-	"github.com/icrowley/fake"
 	"github.com/jennyservices/jenny/auth"
 )
 
@@ -27,11 +26,11 @@ func (u *User) Details() map[string]string {
 	return nil
 }
 
-func FakeUser(ctx context.Context) context.Context {
+func FakeUser(ctx context.Context, name, email, id string) context.Context {
 	return context.WithValue(ctx, auth.UserContextKey, &User{
-		name:  fake.FullName(),
-		email: fake.EmailAddress(),
-		id:    fake.Characters(),
+		name:  name,
+		email: email,
+		id:    id,
 	})
 
 }
