@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Setting up the Server · jenny</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;p&gt;Let&#x27;s start by creating our first swagger definition.&lt;/p&gt;
+"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Setting up the Server · jenny"/><meta property="og:type" content="website"/><meta property="og:url" content="https://jennyservices.github.io/jenny/index.html"/><meta property="og:description" content="&lt;p&gt;Let&#x27;s start by creating our first swagger definition.&lt;/p&gt;
+"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/jenny/img/jenny.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://jennyservices.github.io/jenny/blog/atom.xml" title="jenny Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://jennyservices.github.io/jenny/blog/feed.xml" title="jenny Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/jenny/css/main.css"/><script src="/jenny/js/codetabs.js"></script></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/jenny/"><img class="logo" src="/jenny/img/jenny.svg" alt="jenny"/><h2 class="headerTitleWithLogo">jenny</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/jenny/docs/readme.html" target="_self">Docs</a></li><li class=""><a href="/jenny/docs/options.html" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/jenny/docs/tutorials.html" target="_self">Tutorials</a></li><li class=""><a href="/jenny/help.html" target="_self">Help</a></li><li class=""><a href="/jenny/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>User-Service</span></h2></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Tutorials</h3><ul class=""><li class="navListItem"><a class="navItem" href="/jenny/docs/tutorials.html">Index</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">User-Service</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/jenny/docs/user-service-1.html">Setting up the Server</a></li><li class="navListItem"><a class="navItem" href="/jenny/docs/user-service-2.html">Adding a datastore</a></li><li class="navListItem"><a class="navItem" href="/jenny/docs/user-service-3.html">Adding unit tests and mocks</a></li><li class="navListItem"><a class="navItem" href="/jenny/docs/user-service-4.html">Adding integration tests</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Setting up the Server</h1></header><article><div><span><p>Let's start by creating our first swagger definition.</p>
+<pre><code class="hljs">touch transport/v1/swagger<span class="hljs-selector-class">.yaml</span>
+</code></pre>
+<p>Our simple service has one method on <code>/user</code> path.</p>
+<pre><code class="hljs css language-yaml"><span class="hljs-attr">swagger:</span> <span class="hljs-string">"2.0"</span>
+<span class="hljs-attr">info:</span>
+<span class="hljs-attr">  version:</span> <span class="hljs-number">1.0</span><span class="hljs-number">.0</span>
+<span class="hljs-attr">  title:</span> <span class="hljs-string">Users</span>
+<span class="hljs-attr">  license:</span>
+<span class="hljs-attr">    name:</span> <span class="hljs-string">MIT</span>
+<span class="hljs-attr">paths:</span>
+  <span class="hljs-string">/user:</span>
+<span class="hljs-attr">    get:</span>
+<span class="hljs-attr">      summary:</span> <span class="hljs-string">Gets</span> <span class="hljs-string">a</span> <span class="hljs-string">User</span> <span class="hljs-string">from</span> <span class="hljs-string">the</span> <span class="hljs-string">database</span>
+<span class="hljs-attr">      operationId:</span> <span class="hljs-string">getUser</span>
+<span class="hljs-attr">      tags:</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">User</span>
+<span class="hljs-attr">      parameters:</span>
+<span class="hljs-attr">        - name:</span> <span class="hljs-string">id</span>
+<span class="hljs-attr">          in:</span> <span class="hljs-string">query</span>
+<span class="hljs-attr">          required:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">          description:</span> <span class="hljs-string">Id</span> <span class="hljs-string">of</span> <span class="hljs-string">the</span> <span class="hljs-string">user</span>
+<span class="hljs-attr">          type:</span> <span class="hljs-string">number</span>
+<span class="hljs-attr">      responses:</span>
+        <span class="hljs-number">200</span><span class="hljs-string">:</span>
+<span class="hljs-attr">          schema:</span>
+            <span class="hljs-string">$ref:</span> <span class="hljs-string">'#/definitions/User'</span>
+        <span class="hljs-number">404</span><span class="hljs-string">:</span>
+<span class="hljs-attr">          description:</span> <span class="hljs-string">User</span> <span class="hljs-string">can't</span> <span class="hljs-string">be</span> <span class="hljs-string">found</span>
+<span class="hljs-attr">definitions:</span>
+<span class="hljs-attr">  User:</span>
+<span class="hljs-attr">    properties:</span>
+<span class="hljs-attr">      id:</span>
+<span class="hljs-attr">        type:</span> <span class="hljs-string">number</span>
+<span class="hljs-attr">      name:</span>
+<span class="hljs-attr">        type:</span> <span class="hljs-string">string</span>
+</code></pre>
+<p>Now it's time to generate our code</p>
+<pre><code class="hljs">jenny <span class="hljs-keyword">generate</span>
+</code></pre>
+<p>Now that we have a look at what's been created very briefly by navigating to the
+<code>transport/v1/jenny.go</code> file.</p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">// Users as generated by Jenny</span>
+<span class="hljs-comment">// Please read more at https://localhost:8080/_spec</span>
+<span class="hljs-keyword">type</span> Users <span class="hljs-keyword">interface</span> {
+
+    <span class="hljs-comment">// GetUser Gets a User from the database</span>
+    GetUser(ctx context.Context, ID <span class="hljs-keyword">int</span>) (Body *User, err error)
+}
+</code></pre>
+<p>Let's first create a <code>user.go</code> file under <code>user</code> package, which will implement
+the business logic of our API.</p>
+<pre><code class="hljs css language-go"><span class="hljs-keyword">type</span> userService <span class="hljs-keyword">struct</span> {
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(us *userService)</span> <span class="hljs-title">GetUser</span><span class="hljs-params">(ctx context.Context, id <span class="hljs-keyword">int</span>)</span> <span class="hljs-params">(*v1.User, error)</span></span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, errors.New(<span class="hljs-string">"not implemented"</span>)
+}
+<span class="hljs-comment">// New retuns a new UserService as required by the transport layer</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">New</span><span class="hljs-params">()</span> <span class="hljs-title">v1</span>.<span class="hljs-title">Users</span></span> {
+    <span class="hljs-keyword">return</span> &amp;userService{}
+}
+</code></pre>
+<p>Now that we have a broken implementation of our API let's glue everything
+together.</p>
+<p>First we create a new file called <code>main.go</code> under <code>cmd/userservice/</code></p>
+<p>Let's import the transport package</p>
+<pre><code class="hljs css language-go"><span class="hljs-keyword">import</span> (
+     <span class="hljs-string">"github.com/Typeform/users/transport/v1"</span>
+     <span class="hljs-string">"github.com/Typeform/users/user"</span>
+)
+</code></pre>
+<p>And put everything together</p>
+<pre><code class="hljs css language-go">userService := user.New()
+us := v1.NewUsersServer(userService)
+
+log.Printf(<span class="hljs-string">"listening at %s\n"</span>, *addr)
+log.Fatal(<span class="hljs-string">"listening at "</span>+*addr+<span class="hljs-string">" failed: "</span>, http.ListenAndServe(*addr, us))
+</code></pre>
+<p><a href="https://github.com/sevki/user/tree/tutorial-1">See all files</a></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/jenny/docs/tutorials.html"><span class="arrow-prev">← </span><span>Index</span></a><a class="docs-next button" href="/jenny/docs/user-service-2.html"><span>Adding a datastore</span><span class="arrow-next"> →</span></a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/jenny/" class="nav-home"><img src="/jenny/img/jenny.svg" alt="jenny" width="66" height="58"/></a><div><h5>Docs</h5><a href="/jenny/docs/readme.html">Getting Started</a><a href="/jenny/docs/tutorials.html">Tutorials </a><a href="https://godoc.org/github.com/Typeform/jenny">Go Docs</a></div><div><h5>Community</h5><a href="/jenny/en/users.html">User Showcase</a><a href="https://groups.google.com/forum/#!forum/jenny-dev" target="_blank">Mailing List</a><a href="https://github.com/jennyservices/jenny/issues" target="_blank">Issues</a></div><div><h5>More</h5><a href="/jenny/blog">Blog</a><a class="github-button" href="https://github.com/jennyservices/jenny" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://typeform.github.io" target="_blank" class="fbOpenSource">Typeform Open Source</a><section class="copyright">Copyright © 2019 Typeform SL.</section></footer></div></body></html>
