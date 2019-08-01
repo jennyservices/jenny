@@ -5,15 +5,16 @@
 package options
 
 import (
-	"github.com/jennyservices/jenny/auth"
-	"github.com/jennyservices/jenny/errors"
-	jennyhttp "github.com/jennyservices/jenny/http"
 	stdjwt "github.com/dgrijalva/jwt-go"
 	"github.com/go-kit/kit/auth/jwt"
 	"github.com/go-kit/kit/endpoint"
 	kittracing "github.com/go-kit/kit/tracing/opentracing"
+	kittgrpc "github.com/go-kit/kit/transport/grpc"
 	kitthttp "github.com/go-kit/kit/transport/http"
 	"github.com/golang-collections/collections/stack"
+	"github.com/jennyservices/jenny/auth"
+	"github.com/jennyservices/jenny/errors"
+	jennyhttp "github.com/jennyservices/jenny/http"
 	opentracing "github.com/opentracing/opentracing-go"
 )
 
@@ -29,7 +30,8 @@ type Options struct {
 	sm stdjwt.SigningMethod
 	cf jwt.ClaimsFactory
 
-	jwtFunc kitthttp.RequestFunc
+	httpJWTextractor kitthttp.RequestFunc
+	grpcJWTextractor kittgrpc.ServerRequestFunc
 
 	userFunc   auth.JWTUserExtractor
 	scopesFunc auth.JWTScopesExtrator
@@ -118,11 +120,20 @@ func (m *Options) HTTPOptions() []kitthttp.ServerOption {
 	opts := []kitthttp.ServerOption{
 		kitthttp.ServerBefore(jennyhttp.PopulateRequestContext),
 	}
-	if m.jwtFunc != nil {
-		opts = append(opts, kitthttp.ServerBefore(m.jwtFunc))
+	if m.httpJWTextractor != nil {
+		opts = append(opts, kitthttp.ServerBefore(m.httpJWTextractor))
 	}
 	if m.errorEncoder != nil {
 		opts = append(opts, kitthttp.ServerErrorEncoder(m.errorEncoder))
+	}
+	return opts
+}
+
+// HTTPOptions returns all the server options to be used with HTTP endpoints
+func (m *Options) GRPCOptions() []kittgrpc.ServerOption {
+	opts := []kittgrpc.ServerOption{}
+	if m.grpcJWTextractor != nil {
+		opts = append(opts, kittgrpc.ServerBefore(m.grpcJWTextractor))
 	}
 	return opts
 }
@@ -135,11 +146,22 @@ func WithErrorReporting(reporter errors.Reporter) Option {
 	}
 }
 
-// WithJWTParser gets a keyfunc method and claims factory and injects it to the enpoints that require
+// WithHTTPJWTParser gets a keyfunc method and claims factory and injects it to the enpoints that require
 // JWT security
-func WithJWTParser(jwtFunc kitthttp.RequestFunc, keyFunc stdjwt.Keyfunc, method stdjwt.SigningMethod, cf jwt.ClaimsFactory) Option {
+func WithHTTPJWTParser(jwtFunc kitthttp.RequestFunc, keyFunc stdjwt.Keyfunc, method stdjwt.SigningMethod, cf jwt.ClaimsFactory) Option {
 	return func(m *Options) {
-		m.jwtFunc = jwtFunc
+		m.httpJWTextractor = jwtFunc
+		m.kf = keyFunc
+		m.sm = method
+		m.cf = cf
+	}
+}
+
+// WithHTTPJWTParser gets a keyfunc method and claims factory and injects it to the enpoints that require
+// JWT security
+func WithGRPCJWTParser(jwtFunc kittgrpc.ServerRequestFunc, keyFunc stdjwt.Keyfunc, method stdjwt.SigningMethod, cf jwt.ClaimsFactory) Option {
+	return func(m *Options) {
+		m.grpcJWTextractor = jwtFunc
 		m.kf = keyFunc
 		m.sm = method
 		m.cf = cf

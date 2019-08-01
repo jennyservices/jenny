@@ -9,7 +9,6 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
 
@@ -115,7 +114,6 @@ func JWTToContext(keyFunc stdjwt.Keyfunc, method stdjwt.SigningMethod, newClaims
 			if !ok {
 				return next(ctx, request)
 			}
-
 			// Parse takes the token string and a function for looking up the
 			// key. The latter is especially useful if you use multiple keys
 			// for your application.  The standard is to use 'kid' in the head
@@ -124,7 +122,7 @@ func JWTToContext(keyFunc stdjwt.Keyfunc, method stdjwt.SigningMethod, newClaims
 			// flexibility.
 			token, err := stdjwt.ParseWithClaims(tokenString, newClaims(), keyFunc)
 			if err != nil {
-				log.Println(errors.Wrap(err, "jwttoctx"))
+				return nil, err
 			}
 			if !token.Valid {
 				return next(ctx, request)
